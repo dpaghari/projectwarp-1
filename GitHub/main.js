@@ -28,7 +28,7 @@ var g_resources = [{
 	}, {
 	name: "title_screen",
 	type: "image",
-	src: "data/GUI/title_screen.jpg"
+	src: "data/GUI/title_screen.png"
 }, {
 	name: "32x32_font",
 	type: "image",

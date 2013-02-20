@@ -24,8 +24,8 @@ var TitleScreen = me.ScreenObject.extend(
 		this.scrollerfont  =  null;
 		this.scrollertween = null;
 		
-		this.scroller = "Developed by Superawesomemegasquad, 2013";
-		this.scrollerpos = 600;
+		this.scroller = "DEVELOPED BY SUPERAWESOMEMEGASQUAD - 2013                       ";
+		this.scrollerpos = 640;
 	},
 	/* ---
 		reset function
@@ -48,7 +48,7 @@ var TitleScreen = me.ScreenObject.extend(
 		}
       
 		// reset to default value
-		this.scrollerpos = 640;
+		this.scrollerpos = 540;
 		
 		// a tween to animate the arrow
 		this.scrollertween = new me.Tween(this).to({scrollerpos: -2200 }, 10000).onComplete(this.scrollover.bind(this)).start();
@@ -95,7 +95,10 @@ var TitleScreen = me.ScreenObject.extend(
 	{
 		context.drawImage(this.title, 0,0);
 		
-		this.font.draw (context, "PRESS ENTER TO PLAY",	 20, 240);
+		this.font.draw (context, "NEW GAME",	 130, 270);
+		this.scrollerfont.draw(context, this.scroller, this.scrollerpos, 440);
+		
+		this.font.draw (context, "LOAD GAME", 130, 330);
 		this.scrollerfont.draw(context, this.scroller, this.scrollerpos, 440);
 	},
 	
