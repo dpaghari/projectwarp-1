@@ -10,14 +10,18 @@
 // game resources
 
 var g_resources = [{
-	name : "area01_level_tiles",
+	name : "gametileset",
 	type : "image",
-	src : "data/area01_tileset/area01_level_tiles.png"
+	src : "data/area01_tileset/gametileset.png"
 }, {
 	name : "area01",
 	type : "tmx",
-	src : "data/area01.tmx"
-}, {
+	src : "data/area01_tileset/area01.tmx"
+},{
+	name: "metatiles32x32",
+	type: "image",
+	src: "data/area01_tileset/metatiles32x32.png"
+},{
 	name : "gripe_run_right",
 	type : "image",
 	src : "data/player.png"
