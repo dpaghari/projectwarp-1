@@ -11,6 +11,7 @@ var BulletEntity = me.ObjectEntity.extend({
     init: function(x, y, settings) {
         // call the constructor
         this.parent(x, y, settings);
+        
         //this.setVelocity(10, 20);
         this.gravity = 0;
         //me.input.mouse.pos()

@@ -31,3 +31,10 @@ Tuesday February 19, 2013(Nathan)
 Tuesday February 19, 2013(John)
 
 **Added a menu screen. 
+
+Wednesday February 20, 2013(Daniel)
+
+**Created a test level for the prototype
+**Renamed entities.js to player.js
+**Placed new tileset
+**New main player sprite put in by nathan
