@@ -20,7 +20,7 @@ var g_resources = [{
 }, {
 	name : "gripe_run_right",
 	type : "image",
-	src : "data/sprite/gripe_run_right.png"
+	src : "data/player.png"
 }, {
 	name : "bullet",
 	type : "image",
