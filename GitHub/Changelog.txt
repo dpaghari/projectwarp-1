@@ -28,6 +28,6 @@ Tuesday February 19, 2013(Nathan)
 **Got the character to warp to the bullet's position upon pressing the spacebar.
 **Deletes the bullet when shooting more than one.
 
-Tuesday February 19, 2013(Nathan)
+Tuesday February 19, 2013(John)
 
 **Added a menu screen. 
