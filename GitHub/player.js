@@ -19,7 +19,7 @@ var PlayerEntity = me.ObjectEntity.extend({
  
         // set the display to follow our position on both axis
         me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
- 
+		me.Viewport(20, 20,50, 50, 50, 50);
     },
 
     /* -----
@@ -63,8 +63,8 @@ var PlayerEntity = me.ObjectEntity.extend({
         		bulletAlive = false;
         	}
         	//normalize vectors to make speed constant
-        	var mouseX = me.input.mouse.pos.x-this.pos.x;
-        	var mouseY = me.input.mouse.pos.y-this.pos.y;
+        	var mouseX = (me.input.mouse.pos.x+me.game.viewport.pos.x)-this.pos.x;		 //mouse x position + offset of viewport
+        	var mouseY = (me.input.mouse.pos.y+me.game.viewport.pos.y)-this.pos.y;		//mouse y position + offset of viewport
         	var magnitude = (Math.sqrt(mouseX*mouseX + mouseY*mouseY));
         	var vectorX = mouseX/magnitude;				
   		   	var vectorY = mouseY/magnitude;

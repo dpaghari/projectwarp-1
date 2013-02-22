@@ -53,10 +53,11 @@ var jsApp = {
 	onload : function() {
 
 		// init the video
-		if (!me.video.init('jsapp', 640, 480, false, 1.0)) {
+		if (!me.video.init('jsapp', 800, 600, false, 1.0)) {
 			alert("Sorry but your browser does not support html 5 canvas.");
 			return;
 		}
+		
 
 		// initialize the "audio"
 		me.audio.init("mp3,ogg");
