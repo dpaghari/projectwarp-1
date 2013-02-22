@@ -12,23 +12,23 @@
 var g_resources = [{
 	name : "gametileset",
 	type : "image",
-	src : "data/area01_tileset/gametileset.png"
+	src : "data/tileset/gametileset.png"
 }, {
-	name : "area01",
+	name : "level1",
 	type : "tmx",
-	src : "data/area01_tileset/area01.tmx"
+	src : "data/tileset/level1.tmx"
 },{
 	name: "metatiles32x32",
 	type: "image",
-	src: "data/area01_tileset/metatiles32x32.png"
+	src: "data/tileset/metatiles32x32.png"
 },{
-	name : "gripe_run_right",
+	name : "player_stand",
 	type : "image",
-	src : "data/player.png"
+	src : "data/player_new.png"
 }, {
 	name : "bullet",
 	type : "image",
-	src : "data/gun.png"
+	src : "data/bullet.png"
 }, {
 	name : "title_screen",
 	type : "image",
@@ -92,7 +92,7 @@ var jsApp = {
 
 		// add our player entity in the entity pool
 		me.entityPool.add("mainPlayer", PlayerEntity);
-		me.entityPool.add("bullet", BulletEntity);
+		//me.entityPool.add("bullet", BulletEntity);
 
 		// enable the keyboard
 		me.input.bindKey(me.input.KEY.A, "left");
@@ -116,7 +116,7 @@ var PlayScreen = me.ScreenObject.extend({
 	onResetEvent : function() {
 		// stuff to reset on state change
 		// loads previous level
-		me.levelDirector.loadLevel("area01");
+		me.levelDirector.loadLevel("level1");
 	},
 
 	/* ---
