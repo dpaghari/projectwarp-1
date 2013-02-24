@@ -23,10 +23,9 @@ var BulletEntity = me.ObjectEntity.extend({
  
     ------ */
     update: function() {
-    	
-    	//this.vel.y += this.dir.y;
-    	//this.vel.x += this.dir.x;    	 
-    	    	//alert(this.dir);
+    	//if(this.collideType(solid, false)){
+    	//	me.game.remove(this, true);
+    	//}   	 
     	this.updateMovement();
  	}
  

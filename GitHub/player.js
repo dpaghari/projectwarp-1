@@ -19,7 +19,7 @@ var PlayerEntity = me.ObjectEntity.extend({
  
         // set the display to follow our position on both axis
         me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
-		me.Viewport(20, 20,50, 50, 50, 50);
+		
     },
 
     /* -----
