@@ -11,9 +11,10 @@ var BulletEntity = me.ObjectEntity.extend({
     init: function(x, y, settings) {
         // call the constructor
         this.parent(x, y, settings);
-        
+        var counter = 0;
         //this.setVelocity(10, 20);
         this.gravity = 0;
+        this.timeAlive = me.timer.getTime();				// returns current game time			
         //me.input.mouse.pos()
     },
     
@@ -23,6 +24,22 @@ var BulletEntity = me.ObjectEntity.extend({
  
     ------ */
     update: function() {
+    	var elapsedTime = me.timer.getTime() - this.timeAlive;			// Bullet Lifetime
+    						
+    	if(elapsedTime > 1000){											// If 1 second has passed
+    		me.game.remove(this);
+    		bulletAlive = false;
+    		
+    	}
+    	/*var count = me.timer.tick;
+    	for(i = count; i < 60; i++){
+    		if(count % 4 == 0){
+    			me.game.remove(this);
+    		}
+    		
+    	}
+    	*/
+   		
     	//if(this.collideType(solid, false)){
     	//	me.game.remove(this, true);
     	//}   	 
@@ -32,3 +49,4 @@ var BulletEntity = me.ObjectEntity.extend({
  
 });
 
+BulletEntity.prototype.timeAlive;
