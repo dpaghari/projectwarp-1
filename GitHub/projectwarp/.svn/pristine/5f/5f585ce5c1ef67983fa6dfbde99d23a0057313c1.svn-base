@@ -1,0 +1,43 @@
+<html>
+	<head>
+		<title> Project Warp </title>
+		<script src = "brine.js"></script>
+		<script src = "Flux.js"></script>
+		<script src = "Block.js"></script>
+		<script>
+		
+use2D = true;
+
+var guy = new Flux();
+world.addChild(guy);
+
+var wurld = new CollisionGrid(0, 0, 800, 600, 400, 300);
+//wurld.insert(guy);
+//wurld.insert(block);
+wurld.update = function(d){
+	wurld.insert(guy);
+	wurld.insert(block);	
+}
+wurld.draw = function(ctx){
+	this.drawChildren(ctx);
+}
+world.addChild(wurld);
+
+var block = new Block();
+block.x = 0;
+block.y = 500;
+world.addChild(block);
+
+
+world.update = function(d){
+	this.updateChildren(d);
+}
+
+</script>
+	</head>
+	<body onload = "initGame('canvas');">
+		<canvas id = "canvas" width = "800" height = "600" style = "border: solid black;">
+			You shouldn't see this.
+		</canvas>
+	</body>
+</html>

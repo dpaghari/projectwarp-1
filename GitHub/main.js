@@ -18,6 +18,10 @@ var g_resources = [{
 	type : "tmx",
 	src : "data/tileset/level1.tmx"
 },{
+	name : "loading_screen",
+	type : "image",
+	src : "data/loading_screen.jpg"
+},{
 	name: "metatiles32x32",
 	type: "image",
 	src: "data/tileset/metatiles32x32.png"
@@ -59,6 +63,9 @@ var jsApp = {
 		}
 		
 
+		// load everything & display a loading screen
+		me.state.change(me.state.LOADING);
+		
 		// initialize the "audio"
 		me.audio.init("mp3,ogg");
 
@@ -67,9 +74,6 @@ var jsApp = {
 
 		// set all resources to be loaded
 		me.loader.preload(g_resources);
-
-		// load everything & display a loading screen
-		me.state.change(me.state.LOADING);
 	},
 
 	/* ---
@@ -87,6 +91,9 @@ var jsApp = {
 
 		// set the pause screen object
 		me.state.set(me.state.PAUSE, new PauseScreen());
+		
+		// set the load screen object
+		me.state.set(me.state.LOADING, new CustomLoadingScreen());
 
 		// set a global fading transition for the screen
 		me.state.transition("fade", "#0FFFFF", 250);
@@ -129,7 +136,7 @@ var PlayScreen = me.ScreenObject.extend({
 		
 		//Go to the pause screen when ESCAPE is pressed
 		me.input.bindKey(me.input.KEY.ESCAPE);
-		me.state.change(me.state.escape, new PauseScreen());
+		me.state.change(me.state.PAUSE);
 
 		//just in case
 		this.scrollertween.stop();
