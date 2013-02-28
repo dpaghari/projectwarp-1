@@ -14,6 +14,7 @@ var g_resources = [{
 	type : "image",
 	src : "data/tileset/gametileset.png"
 }, {
+	//Levels go here
 	name : "level1",
 	type : "tmx",
 	src : "data/tileset/level1.tmx"
@@ -33,6 +34,10 @@ var g_resources = [{
 	name : "bullet",
 	type : "image",
 	src : "data/bullet.png"
+}, {
+	name : "gun",
+	type : "image",
+	src : "data/gun.png"
 }, {
 	name : "title_screen",
 	type : "image",
@@ -103,8 +108,8 @@ var jsApp = {
 
 		// add our player entity in the entity pool
 		me.entityPool.add("mainPlayer", PlayerEntity);
-		//me.entityPool.add("bullet", BulletEntity);
-
+		me.entityPool.add("gun", collectable);
+		
 		// enable the keyboard
 		me.input.bindKey(me.input.KEY.A, "left");
 		me.input.bindKey(me.input.KEY.D, "right");
@@ -118,6 +123,13 @@ var jsApp = {
 		me.state.change(me.state.MENU);
 	}
 };
+
+var collectable = me.CollectableEntity.extend({
+	onCollision: function(){
+		//Load the next level in the game
+		me.levelDirector.nextLevel();
+	}
+});
 
 // jsApp
 
