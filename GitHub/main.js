@@ -42,12 +42,15 @@ var g_resources = [{
 	type : "image",
 	src : "data/sprite/32x32_font.png"
 }, {
-	name : "cling",
-	type : "audio",
-	src : "data/audio/",
-	channel : 2
+	name: "stomp",
+	type: "audio",
+	src: "data/audio/",
+},{
+	name: "cling",
+    type: "audio",
+    src: "data/audio/",
+    channel: 2
 }];
-
 var jsApp = {
 	/* ---
 

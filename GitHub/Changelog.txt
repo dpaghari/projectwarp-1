@@ -38,3 +38,10 @@ Wednesday February 20, 2013(Daniel)
 **Renamed entities.js to player.js
 **Placed new tileset
 **New main player sprite put in by nathan
+
+
+Wednesday February 20, 2013(John M)
+
+**Implemented collision between bullet and the solids
+**Implemented bullet, so only shooting one bullet at a time
+**added sound effect to the bullet
