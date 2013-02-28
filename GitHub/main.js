@@ -108,7 +108,7 @@ var jsApp = {
 
 		// add our player entity in the entity pool
 		me.entityPool.add("mainPlayer", PlayerEntity);
-		me.entityPool.add("gun", collectable);
+		me.entityPool.add("Collectable", Collectable);
 		
 		// enable the keyboard
 		me.input.bindKey(me.input.KEY.A, "left");
@@ -124,11 +124,26 @@ var jsApp = {
 	}
 };
 
-var collectable = me.CollectableEntity.extend({
-	onCollision: function(){
-		//Load the next level in the game
-		me.levelDirector.nextLevel();
-	}
+var Collectable = me.CollectableEntity.extend({
+	// extending the init function is not mandatory
+    // unless you need to add some extra initialization
+    init: function(x, y, settings) {
+        // call the parent constructor
+        this.parent(x, y, settings);
+    },
+ 
+    // this function is called by the engine, when
+    // an object is touched by something (here collected)
+    onCollision: function() {
+    	alert("collided");
+    	 // make sure it cannot be collected "again"
+        this.collidable = false;
+        // remove it
+        me.game.remove(this);
+        // do something when collected
+        alert("Go to the next level bro");
+        me.levelDirector.nextLevel();
+    }
 });
 
 // jsApp

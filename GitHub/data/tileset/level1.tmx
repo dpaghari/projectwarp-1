@@ -39,8 +39,8 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="CollectableEntity" width="32" height="25">
-  <object name="collectable" x="960" y="352" width="35" height="62">
+ <objectgroup name="Collectable" width="32" height="25">
+  <object name="Collectable" x="925" y="378" width="33" height="35">
    <properties>
     <property name="image" value="gun"/>
     <property name="spritewidth" value="32"/>
