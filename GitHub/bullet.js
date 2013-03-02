@@ -39,9 +39,12 @@ var BulletEntity = me.ObjectEntity.extend({
 		    me.game.remove(this);
 			bulletAlive = false;
 		  
-	      }				// Bullet Lifetime
+	      }				
+    					
+    	// Bullet Lifetime				
     						
-    	if(elapsedTime > 1000){											// If 1 second has passed
+    	// If 1 second has passed					
+    	if(elapsedTime > 1000){											
     		me.game.remove(this);
     		bulletAlive = false;
     		

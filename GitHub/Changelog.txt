@@ -45,3 +45,7 @@ Wednesday February 20, 2013(John M)
 **Implemented collision between bullet and the solids
 **Implemented bullet, so only shooting one bullet at a time
 **added sound effect to the bullet
+
+Friday March 1, 2013 (John B)
+
+**Added music!

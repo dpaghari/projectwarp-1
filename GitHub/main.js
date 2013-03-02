@@ -51,6 +51,10 @@ var g_resources = [{
 	type: "audio",
 	src: "data/audio/",
 },{
+	name: "ProjectWarpPrototypeTheme",
+	type: "audio",
+	src: "data/audio/",
+},{
 	name: "cling",
     type: "audio",
     src: "data/audio/",
@@ -155,6 +159,12 @@ var PlayScreen = me.ScreenObject.extend({
 		// stuff to reset on state change
 		// loads previous level
 		me.levelDirector.loadLevel("level1");
+		//Find a cleaner way to make the song repeat...
+		var songLoop;
+		for(songLoop = 0; songLoop < 10; songLoop++){
+		   me.audio.play("ProjectWarpPrototypeTheme");
+		   songLoop++;
+		}
 	},
 
 	/* ---
