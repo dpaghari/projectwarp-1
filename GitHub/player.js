@@ -29,12 +29,6 @@ var PlayerEntity = me.ObjectEntity.extend({
     ------ */
     update: function() {
     	
-    	/*if(this.collideType(LaserEntity, false)){
-    		alert("lols");
-    		me.game.remove(this);
-    		me.game.reset();
-    	}
- */
         if (me.input.isKeyPressed('left')) {
         	
             // flip the sprite on horizontal axis
