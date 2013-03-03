@@ -46,6 +46,6 @@ Wednesday February 20, 2013(John M)
 **Implemented bullet, so only shooting one bullet at a time
 **added sound effect to the bullet
 
-Friday March 1, 2013 (John B)
+Friday March 2, 2013 (John B)
 
-**Added music!
+**Added music! Also put some other music files in the audio folder
