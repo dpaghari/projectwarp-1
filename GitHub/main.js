@@ -9,6 +9,7 @@
 
 // game resources
 
+
 var g_resources = [{
 	name : "gametileset",
 	type : "image",
@@ -68,8 +69,10 @@ var jsApp = {
 	 ---			*/
 	onload : function() {
 
+		//var canvasWidth = me.video.getWidth();
+	    //var canvasHeight = me.video.getHeight();
 		// init the video
-		if (!me.video.init('jsapp', 1024, 720, false, 1.0)) {
+		if (!me.video.init('jsapp', 800, 600, false, 1.0)) {
 			alert("Sorry but your browser does not support html 5 canvas.");
 			return;
 		}
@@ -112,7 +115,7 @@ var jsApp = {
 
 		// add our player entity in the entity pool
 		me.entityPool.add("mainPlayer", PlayerEntity);
-		me.entityPool.add("Collectable", Collectable);
+		me.entityPool.add("LabNoteEntity", CollectableEntity);
 		
 		// enable the keyboard
 		me.input.bindKey(me.input.KEY.A, "left");
@@ -128,7 +131,7 @@ var jsApp = {
 	}
 };
 
-var Collectable = me.CollectableEntity.extend({
+var CollectableEntity = me.ObjectEntity.extend({
 	// extending the init function is not mandatory
     // unless you need to add some extra initialization
     init: function(x, y, settings) {
@@ -145,7 +148,13 @@ var Collectable = me.CollectableEntity.extend({
         // remove it
         me.game.remove(this);
         // do something when collected
-        alert("Go to the next level bro");
+        alert("May 22, 2120: I have begun research on developing a prototype\n" + 
+        "that will revolutionize both travel and combat in the new age.\n" + 
+        "I will begin selecting participants soon. Winston seems like a rather capable\n" +
+        "individual- he’s incredibly gifted.\n" +   
+        "I will gather resources necessary to begin this project over this coming fortnight...\n" + 
+        "~~Everything seemed fine when we worked together, you and I\n" + 
+        "We’ve accomplished so much, and learned a great deal...~~");
         me.levelDirector.nextLevel();
     }
 });
@@ -155,18 +164,28 @@ var Collectable = me.CollectableEntity.extend({
 /* the in game stuff*/
 var PlayScreen = me.ScreenObject.extend({
 
+	/* 
+	 * Stuff to reset to state change
+	 */
+	
+	//var labNoteVector = me.Vector2D;
+
 	onResetEvent : function() {
-		// stuff to reset on state change
 		// loads previous level
 		me.levelDirector.loadLevel("level1");
+		alert("Used the W, A, and D key to move. \nUse the mouse to aim the gun and click to fire. \nPress SPACE to warp!");
 		//Find a cleaner way to make the song repeat...
 		var songLoop;
 		for(songLoop = 0; songLoop < 10; songLoop++){
 		   me.audio.play("ProjectWarpPrototypeTheme");
 		   songLoop++;
 		}
+		if (me.input.isKeyPressed('escape')){
+			me.state.change(me.state.PAUSE);
+		}
 	},
 
+	//CollectableEntity.onCollision(labNoteVector, PlayerEntity);
 	/* ---
 
 	 action to perform when game is finished (state change)

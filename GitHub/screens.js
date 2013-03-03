@@ -21,8 +21,8 @@ var TitleScreen = me.ScreenObject.extend({
 		this.scrollerfont  =  null;
 		this.scrollertween = null;
 		
-		this.scroller = "DEVELOPED BY SUPERAWESOMEMEGASQUAD - 2013                       ";
-		this.scrollerpos = 740;
+		this.scroller = "DEVELOPED BY SUPERAWESOMEMEGASQUAD - 2013";
+		this.scrollerpos = 740;   //(canvas.height) - 560?
 	},
 	/* ---
 		reset function
@@ -75,6 +75,7 @@ var TitleScreen = me.ScreenObject.extend({
 		}
 		if (me.input.isKeyPressed('enter'))
 		{
+			//me.state.change(me.state.LOADING);
 			me.state.change(me.state.PLAY);
 		}
 		return true;
@@ -85,14 +86,14 @@ var TitleScreen = me.ScreenObject.extend({
 	{
 		context.drawImage(this.title, 0,0);
 		
-		this.font.draw (context, "NEW GAME",	 390, 270);
+		this.font.draw (context, "PRESS ENTER TO PLAY!", 70, 330);
 		this.scrollerfont.draw(context, this.scroller, this.scrollerpos, 440);
 		
-		this.font.draw (context, "LOAD GAME", 390, 330);
-		this.scrollerfont.draw(context, this.scroller, this.scrollerpos, 440);
+		//this.font.draw (context, "LOAD GAME", 390, 330);
+		//this.scrollerfont.draw(context, this.scroller, this.scrollerpos, 440);
 		
-		this.font.draw (context, "OPTIONS", 390, 390);
-		this.scrollerfont.draw(context, this.scroller, this.scrollerpos, 440);
+		//this.font.draw (context, "OPTIONS", 390, 390);
+		//this.scrollerfont.draw(context, this.scroller, this.scrollerpos, 440);
 	},
 
 	
@@ -123,7 +124,7 @@ var PauseScreen = me.ScreenObject.extend({
 		this.scrollerfont  =  null;
 		this.scrollertween = null;
 		
-		this.scroller = "HAVING TROUBLE? VISIT FACEBOOK.COM/GROUPS/273190622810667/                       ";
+		this.scroller = "HAVING TROUBLE? VISIT FACEBOOK.COM/GROUPS/273190622810667/";
 		this.scrollerpos = 640;
 	},
 
@@ -178,11 +179,11 @@ var PauseScreen = me.ScreenObject.extend({
 	{
 		context.drawImage(this.title, 0,0);
 		
-		this.font.draw (context, "RESUME GAME",	 130, 270);
+		this.font.draw (context, "PRESS ESCAPE TO RESTART GAME",	 130, 270);
 		this.scrollerfont.draw(context, this.scroller, this.scrollerpos, 440);
 		
-		this.font.draw (context, "OPTIONS",	 130, 330);
-		this.scrollerfont.draw(context, this.scroller, this.scrollerpos, 440);
+		//this.font.draw (context, "OPTIONS",	 130, 330);
+		//this.scrollerfont.draw(context, this.scroller, this.scrollerpos, 440);
 	},
 	
     //Function used to change the screen	
@@ -263,6 +264,9 @@ var CustomLoadingScreen = me.ScreenObject.extend(
       // clear the screen
       me.video.clearSurface (context, "black");
 
+	  //Display loading screen image
+	  this.title = me.loader.getImage("loading_screen");
+	  
       // measure the logo size
       logo_width = this.logo.measureText(context,"loading_screen").width;
 

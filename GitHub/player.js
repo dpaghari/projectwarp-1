@@ -63,8 +63,11 @@ var PlayerEntity = me.ObjectEntity.extend({
         		bulletAlive = false;
         	}
         	//normalize vectors to make speed constant
-        	var mouseX = (me.input.mouse.pos.x+me.game.viewport.pos.x)-this.pos.x;		 //mouse x position + offset of viewport
-        	var mouseY = (me.input.mouse.pos.y+me.game.viewport.pos.y)-this.pos.y;		//mouse y position + offset of viewport
+        	
+        	//mouse x position + offset of viewport
+        	var mouseX = (me.input.mouse.pos.x+me.game.viewport.pos.x)-this.pos.x;	
+        	//mouse y position + offset of viewport	 
+        	var mouseY = (me.input.mouse.pos.y+me.game.viewport.pos.y)-this.pos.y;		
         	var magnitude = (Math.sqrt(mouseX*mouseX + mouseY*mouseY));
         	var vectorX = mouseX/magnitude;				
   		   	var vectorY = mouseY/magnitude;
@@ -92,7 +95,10 @@ var PlayerEntity = me.ObjectEntity.extend({
  
         // check & update player movement
         this.updateMovement();
- 
+        
+        // check for collision
+		var res = me.game.collide(this);
+ 	
         // update animation if necessary
         if (this.vel.x!=0 || this.vel.y!=0) {
             // update object animation
@@ -102,7 +108,7 @@ var PlayerEntity = me.ObjectEntity.extend({
          
         // else inform the engine we did not perform
         // any update (e.g. position, animation)
-        return true;
+        return false;
         
         
     }   	  	 
