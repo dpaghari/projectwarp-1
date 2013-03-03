@@ -63,6 +63,7 @@ var BulletEntity = me.ObjectEntity.extend({
     	//	me.game.remove(this, true);
     	//}   	 
     	this.updateMovement();
+    	
  	}
  
  

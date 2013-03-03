@@ -29,6 +29,14 @@ var PlayerEntity = me.ObjectEntity.extend({
     ------ */
     update: function() {
     	
+    	if (this.pos.y > 1000){
+    		
+    		me.game.remove(this);
+    		alert("Game Over!");
+    		me.levelDirector.loadLevel("level1");
+    		
+    	}
+    	
         if (me.input.isKeyPressed('left')) {
         	
             // flip the sprite on horizontal axis

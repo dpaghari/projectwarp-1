@@ -50,11 +50,11 @@ var g_resources = [{
 }, {
 	name: "stomp",
 	type: "audio",
-	src: "data/audio/",
+	src: "data/audio/"
 },{
 	name: "ProjectWarpPrototypeTheme",
 	type: "audio",
-	src: "data/audio/",
+	src: "data/audio/"
 },{
 	name: "cling",
     type: "audio",
@@ -115,8 +115,7 @@ var jsApp = {
 
 		// add our player entity in the entity pool
 		me.entityPool.add("mainPlayer", PlayerEntity);
-		me.entityPool.add("LabNoteEntity", CollectableEntity);
-		me.entityPool.add("Lasers", LaserEntity);
+		
 		
 		// enable the keyboard
 		me.input.bindKey(me.input.KEY.A, "left");
@@ -213,7 +212,9 @@ var PlayScreen = me.ScreenObject.extend({
 		{
 			me.state.change(me.state.PLAY);
 		}
-		return true;
+		
+		//return true;
+		this.updateMovement();
 	},
 	*/
 	
