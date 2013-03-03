@@ -1,0 +1,51 @@
+This will serve as our changelog to make it easier to keep track of everyone's contribution
+and changes to the files(try to follow the format so it's nice and clean):
+
+Thurs Feb 07, 2013(Daniel)
+
+**Tweaked Mai's code with the gravity in the Flux.js file under guy.update() so it's a bit smoother.  
+
+Thurs Feb 07, 2013(John)
+
+**Added prototype class, still working on implementing platforms.
+
+Saturday Feb 09, 2013(Daniel)
+**Implemented Better Gravity as you accelerate when you are falling instead of falling at a constant speed.
+**Implemented constraints on the bullet for the prototype so it bounces off the edges of the screen.
+**Bullet also adjusted to keep going in the direction that the mouse was pointed at(used a unit vector).
+**Started to mess with CollisionGrid(brine) trying to figure out how to make that work with the blocks and create a level.
+
+Monday February 18, 2013(Daniel)
+
+**Implemented MelonJS to be the game engine to be used.
+**Began transferring the code from the Brine engine to the MelonJS engine.
+**Character now shoots but not at the mouse.
+**Started messing with the rotation of the player to be directed at the mouse(incomplete/buggy).
+
+Tuesday February 19, 2013(Nathan)
+
+**Got the bullet to shoot towards the mouse position in the new MelonJS engine.
+**Got the character to warp to the bullet's position upon pressing the spacebar.
+**Deletes the bullet when shooting more than one.
+
+Tuesday February 19, 2013(John)
+
+**Added a menu screen. 
+
+Wednesday February 20, 2013(Daniel)
+
+**Created a test level for the prototype
+**Renamed entities.js to player.js
+**Placed new tileset
+**New main player sprite put in by nathan
+
+
+Wednesday February 20, 2013(John M)
+
+**Implemented collision between bullet and the solids
+**Implemented bullet, so only shooting one bullet at a time
+**added sound effect to the bullet
+
+Friday March 1, 2013 (John B)
+
+**Added music!
