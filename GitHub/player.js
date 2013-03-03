@@ -14,7 +14,7 @@ var PlayerEntity = me.ObjectEntity.extend({
         this.parent(x, y, settings);
  
         // set the default horizontal & vertical speed (accel vector)
-        this.setVelocity(5, 15);
+        this.setVelocity(5, 10);
 
  
         // set the display to follow our position on both axis
@@ -71,7 +71,7 @@ var PlayerEntity = me.ObjectEntity.extend({
         	var magnitude = (Math.sqrt(mouseX*mouseX + mouseY*mouseY));
         	var vectorX = mouseX/magnitude;				
   		   	var vectorY = mouseY/magnitude;
-        	var speed = 10;
+        	var speed = 5;
        		var direction = new me.Vector2d(vectorX*speed, vectorY*speed);
        		//create bullet
         	bullet = new BulletEntity(this.pos.x, this.pos.y, { image: 'bullet', spritewidth: 10 , spriteheight: 10});
@@ -97,7 +97,7 @@ var PlayerEntity = me.ObjectEntity.extend({
         this.updateMovement();
         
         // check for collision
-		var res = me.game.collide(this);
+		//var res = me.game.collide(this);
  	
         // update animation if necessary
         if (this.vel.x!=0 || this.vel.y!=0) {
@@ -108,7 +108,7 @@ var PlayerEntity = me.ObjectEntity.extend({
          
         // else inform the engine we did not perform
         // any update (e.g. position, animation)
-        return false;
+        return true;
         
         
     }   	  	 
