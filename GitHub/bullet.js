@@ -27,14 +27,14 @@ var BulletEntity = me.ObjectEntity.extend({
     update: function() {
     	var elapsedTime = me.timer.getTime() - this.timeAlive;	
     	var collision = this.updateMovement();
-	      
+	/*      
 	   if (!this.visible)
 	      {
 	      	me.audio.play("stomp"); 
 		    me.game.remove(this);
 		    
 	      }
-	   else if (collision.yprop.isSolid||collision.xprop.isSolid)
+	   else*/ if (collision.yprop.isSolid||collision.xprop.isSolid)
 	      {
 	      	me.audio.play("stomp"); 
 		    me.game.remove(this);

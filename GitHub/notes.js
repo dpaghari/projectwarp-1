@@ -8,13 +8,14 @@ var NoteEntity = me.CollectableEntity.extend({
     init: function(x, y, settings) {
         // call the parent constructor
         this.parent(x, y, settings);
+        this.gravity = 0;
     },
  
     // this function is called by the engine, when
     // an object is touched by something (here collected)
     onCollision: function() {
         // do something when collected
- 
+ 		me.levelDirector.loadLevel("level2");
         // make sure it cannot be collected "again"
         this.collidable = false;
         // remove it

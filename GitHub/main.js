@@ -20,6 +20,10 @@ var g_resources = [{
 	type : "tmx",
 	src : "data/tileset/level1.tmx"
 },{
+	name: "level2",
+	type: "tmx",
+	src: "data/tileset/level2.tmx"
+},{
 	name : "loading_screen",
 	type : "image",
 	src : "data/loading_screen.jpg"
@@ -115,6 +119,7 @@ var jsApp = {
 
 		// add our player entity in the entity pool
 		me.entityPool.add("mainPlayer", PlayerEntity);
+		me.entityPool.add("NoteEntity", NoteEntity);
 		
 		
 		// enable the keyboard
@@ -131,33 +136,7 @@ var jsApp = {
 	}
 };
 
-var CollectableEntity = me.ObjectEntity.extend({
-	// extending the init function is not mandatory
-    // unless you need to add some extra initialization
-    init: function(x, y, settings) {
-        // call the parent constructor
-        this.parent(x, y, settings);
-    },
- 
-    // this function is called by the engine, when
-    // an object is touched by something (here collected)
-    onCollision: function() {
-    	alert("collided");
-    	 // make sure it cannot be collected "again"
-        this.collidable = false;
-        // remove it
-        me.game.remove(this);
-        // do something when collected
-        alert("May 22, 2120: I have begun research on developing a prototype\n" + 
-        "that will revolutionize both travel and combat in the new age.\n" + 
-        "I will begin selecting participants soon. Winston seems like a rather capable\n" +
-        "individual- he’s incredibly gifted.\n" +   
-        "I will gather resources necessary to begin this project over this coming fortnight...\n" + 
-        "~~Everything seemed fine when we worked together, you and I\n" + 
-        "We’ve accomplished so much, and learned a great deal...~~");
-        me.levelDirector.nextLevel();
-    }
-});
+
 
 // jsApp
 

@@ -12,6 +12,7 @@ var PlayerEntity = me.ObjectEntity.extend({
     init: function(x, y, settings) {
         // call the constructor
         this.parent(x, y, settings);
+        this.collidable = true;
  
         // set the default horizontal & vertical speed (accel vector)
         this.setVelocity(5, 10);
@@ -67,8 +68,12 @@ var PlayerEntity = me.ObjectEntity.extend({
         
         if (me.input.isKeyPressed('shoot')) {
         	if(bulletAlive == true){		//if bullet exists
+        		
+        		
         		me.game.remove(bullet, true);		//remove it 
+        		
         		bulletAlive = false;
+        		
         	}
         	//normalize vectors to make speed constant
         	
@@ -104,8 +109,9 @@ var PlayerEntity = me.ObjectEntity.extend({
         // check & update player movement
         this.updateMovement();
         
+        
         // check for collision
-		//var res = me.game.collide(this);
+		var res = me.game.collide(this);
  	
         // update animation if necessary
         if (this.vel.x!=0 || this.vel.y!=0) {
