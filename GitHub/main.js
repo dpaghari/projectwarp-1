@@ -116,6 +116,7 @@ var jsApp = {
 		// add our player entity in the entity pool
 		me.entityPool.add("mainPlayer", PlayerEntity);
 		me.entityPool.add("LabNoteEntity", CollectableEntity);
+		me.entityPool.add("Lasers", LaserEntity);
 		
 		// enable the keyboard
 		me.input.bindKey(me.input.KEY.A, "left");
@@ -173,7 +174,7 @@ var PlayScreen = me.ScreenObject.extend({
 	onResetEvent : function() {
 		// loads previous level
 		me.levelDirector.loadLevel("level1");
-		alert("Used the W, A, and D key to move. \nUse the mouse to aim the gun and click to fire. \nPress SPACE to warp!");
+		
 		//Find a cleaner way to make the song repeat...
 		var songLoop;
 		for(songLoop = 0; songLoop < 10; songLoop++){
