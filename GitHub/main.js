@@ -56,7 +56,7 @@ var g_resources = [{
 	type: "audio",
 	src: "data/audio/"
 },{
-	name: "ProjectWarpPrototypeTheme",
+	name: "mysterious caves",
 	type: "audio",
 	src: "data/audio/"
 },{
@@ -154,11 +154,7 @@ var PlayScreen = me.ScreenObject.extend({
 		me.levelDirector.loadLevel("level1");
 		
 		//Find a cleaner way to make the song repeat...
-		var songLoop;
-		for(songLoop = 0; songLoop < 10; songLoop++){
-		   me.audio.play("ProjectWarpPrototypeTheme");
-		   songLoop++;
-		}
+		me.audio.play("mysterious caves");
 		if (me.input.isKeyPressed('escape')){
 			me.state.change(me.state.PAUSE);
 		}
