@@ -30,9 +30,10 @@ var PlayerEntity = me.ObjectEntity.extend({
  
     ------ */
     update: function() {
-    	var speed = 1;
+    	/*var speed = 1;
     	var maxSpeed = 3;
     	var sign = 1;
+    	*/
     	if (this.pos.y > 1000){
     		
     		//alert("Game Over!");
