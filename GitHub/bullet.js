@@ -27,14 +27,35 @@ var BulletEntity = me.ObjectEntity.extend({
     update: function() {
     	var elapsedTime = me.timer.getTime() - this.timeAlive;	
     	var collision = this.updateMovement();
-	/*      
+		var res = me.game.collide(this);
+    
+        if (res && (res.obj.type == me.game.WALL_OBJECT)){
+       	      if (res.x != 0)
+              {
+                           // x axis
+                       if (res.x<0){
+                           direction = new me.Vector2d(-vectorX*speed, vectorY*speed);
+                           this.vel=direction;      
+                           me.audio.play("cling");     
+                       }
+                    
+                       
+                       else{
+                           direction = new me.Vector2d(-vectorX*speed, vectorY*speed);
+                           this.vel=direction;   
+                           me.audio.play("cling");            	
+                       }
+                      
+              }
+       }
+	      
 	   if (!this.visible)
 	      {
 	      	me.audio.play("stomp"); 
 		    me.game.remove(this);
 		    
 	      }
-	   else*/ if (collision.yprop.isSolid||collision.xprop.isSolid)
+	   else if (collision.yprop.isSolid||collision.xprop.isSolid)
 	      {
 	      	me.audio.play("stomp"); 
 		    me.game.remove(this);

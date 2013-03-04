@@ -12,10 +12,9 @@ var PlayerEntity = me.ObjectEntity.extend({
     init: function(x, y, settings) {
         // call the constructor
         this.parent(x, y, settings);
-        this.collidable = true;
  
         // set the default horizontal & vertical speed (accel vector)
-        this.setVelocity(5, 10);
+        this.setVelocity(5, 15);
 
  
         // set the display to follow our position on both axis
@@ -29,26 +28,42 @@ var PlayerEntity = me.ObjectEntity.extend({
  
     ------ */
     update: function() {
-    	
-    	if (this.pos.y > 1000){
-    		
-    		me.game.remove(this);
-    		alert("Game Over!");
-    		me.levelDirector.loadLevel("level1");
-    		
+    	var res = me.game.collide(this);
+    	if (res && (res.obj.type == me.game.WALL_OBJECT)){
+    		 if (res.x != 0)
+             {
+                 // x axis
+                    if (res.x<0){
+                    	 walkleft = false;
+			             walkright= true;
+                    }
+                    
+                       
+                    else{
+                    	 walkleft = true;
+			             walkright= false;                    	
+                    }
+                      
+             }
     	}
-    	
-        if (me.input.isKeyPressed('left')) {
+      	
+
+           if (me.input.isKeyPressed('left')&&(walkleft == true)) {
         	
             // flip the sprite on horizontal axis
             this.flipX(true);
             // update the entity velocity
             this.vel.x -= this.accel.x * me.timer.tick;
-        } else if (me.input.isKeyPressed('right')) {
+            walkright = true;
+
+   
+           } else if (me.input.isKeyPressed('right')&&(walkright == true)) {
             // unflip the sprite
             this.flipX(false);
             // update the entity velocity
             this.vel.x += this.accel.x * me.timer.tick;
+            walkleft = true;
+
         } else {
             this.vel.x = 0;
         }
@@ -63,29 +78,24 @@ var PlayerEntity = me.ObjectEntity.extend({
             }
  
         }
-        
+       
+
+
         
         
         if (me.input.isKeyPressed('shoot')) {
         	if(bulletAlive == true){		//if bullet exists
-        		
-        		
         		me.game.remove(bullet, true);		//remove it 
-        		
         		bulletAlive = false;
-        		
         	}
         	//normalize vectors to make speed constant
-        	
-        	//mouse x position + offset of viewport
-        	var mouseX = (me.input.mouse.pos.x+me.game.viewport.pos.x)-this.pos.x;	
-        	//mouse y position + offset of viewport	 
-        	var mouseY = (me.input.mouse.pos.y+me.game.viewport.pos.y)-this.pos.y;		
-        	var magnitude = (Math.sqrt(mouseX*mouseX + mouseY*mouseY));
-        	var vectorX = mouseX/magnitude;				
-  		   	var vectorY = mouseY/magnitude;
-        	var speed = 5;
-       		var direction = new me.Vector2d(vectorX*speed, vectorY*speed);
+        	mouseX = (me.input.mouse.pos.x+me.game.viewport.pos.x)-this.pos.x;		 //mouse x position + offset of viewport
+        	mouseY = (me.input.mouse.pos.y+me.game.viewport.pos.y)-this.pos.y;		//mouse y position + offset of viewport
+        	magnitude = (Math.sqrt(mouseX*mouseX + mouseY*mouseY));
+        	vectorX = mouseX/magnitude;				
+  		   	vectorY = mouseY/magnitude;
+        	speed = 5;
+       		direction = new me.Vector2d(vectorX*speed, vectorY*speed);
        		//create bullet
         	bullet = new BulletEntity(this.pos.x, this.pos.y, { image: 'bullet', spritewidth: 10 , spriteheight: 10});
         	bullet.vel = direction;
@@ -94,6 +104,7 @@ var PlayerEntity = me.ObjectEntity.extend({
     	  	bulletAlive = true;
        		//alert("lol");
         }
+
         
         if(me.input.isKeyPressed('warp')) {
         	if(bulletAlive == true){
@@ -101,6 +112,8 @@ var PlayerEntity = me.ObjectEntity.extend({
         	this.pos.x = bullet.pos.x;
         	this.pos.y = bullet.pos.y;
         	bulletAlive = false;
+        	walkleft = true;
+			walkright= true;  
         	me.game.remove(bullet, true);
         	}
         }
@@ -108,11 +121,7 @@ var PlayerEntity = me.ObjectEntity.extend({
  
         // check & update player movement
         this.updateMovement();
-        
-        
-        // check for collision
-		var res = me.game.collide(this);
- 	
+ 
         // update animation if necessary
         if (this.vel.x!=0 || this.vel.y!=0) {
             // update object animation
@@ -127,5 +136,16 @@ var PlayerEntity = me.ObjectEntity.extend({
         
     }   	  	 
 });
+var walkleft = true;
+var walkright = true;
 var bulletAlive = false;
+var hitright = false;
+var hileft = false;
 var bullet;
+        	var mouseX ;		 //mouse x position + offset of viewport
+        	var mouseY;		//mouse y position + offset of viewport
+        	var magnitude;
+        	var vectorX ;				
+  		   	var vectorY;
+        	var speed;
+       		var direction;
