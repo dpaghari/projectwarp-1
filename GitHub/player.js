@@ -32,7 +32,8 @@ var PlayerEntity = me.ObjectEntity.extend({
     		
     		alert("Game Over!");
     		me.game.remove(this);
-    		me.levelDirector.loadLevel("level1");
+    		var currentLevel = me.levelDirector.getCurrentLevelId();
+    		me.levelDirector.loadLevel(currentLevel);
     	}
     	var res = me.game.collide(this);
     	if (res && (res.obj.type == me.game.WALL_OBJECT)){

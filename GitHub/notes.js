@@ -14,8 +14,9 @@ var NoteEntity = me.CollectableEntity.extend({
     // this function is called by the engine, when
     // an object is touched by something (here collected)
     onCollision: function() {
+    	var nextLevel = me.levelDirector.nextLevel();
         // do something when collected
- 		me.levelDirector.loadLevel("level2");
+ 		me.levelDirector.loadLevel(nextLevel);
         // make sure it cannot be collected "again"
         this.collidable = false;
         // remove it
