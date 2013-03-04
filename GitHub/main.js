@@ -154,7 +154,8 @@ var PlayScreen = me.ScreenObject.extend({
 		me.levelDirector.loadLevel("level1");
 		
 		//Find a cleaner way to make the song repeat...
-		me.audio.play("mysterious caves");
+		me.audio.playTrack("mysterious caves", 5);
+
 		if (me.input.isKeyPressed('escape')){
 			me.state.change(me.state.PAUSE);
 		}
