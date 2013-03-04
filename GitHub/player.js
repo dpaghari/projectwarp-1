@@ -122,7 +122,7 @@ var PlayerEntity = me.ObjectEntity.extend({
         	magnitude = (Math.sqrt(mouseX*mouseX + mouseY*mouseY));
         	vectorX = mouseX/magnitude;				
   		   	vectorY = mouseY/magnitude;
-        	speed = 5;
+        	speed = 10;
        		direction = new me.Vector2d(vectorX*speed, vectorY*speed);
        		//create bullet
         	bullet = new BulletEntity(this.pos.x, this.pos.y, { image: 'bullet', spritewidth: 15 , spriteheight: 15});
