@@ -14,7 +14,7 @@ var PlayerEntity = me.ObjectEntity.extend({
         this.parent(x, y, settings);
  
         // set the default horizontal & vertical speed (accel vector)
-        this.setVelocity(5, 15);
+        this.setVelocity(5, 10);
 
  
         // set the display to follow our position on both axis
@@ -28,6 +28,12 @@ var PlayerEntity = me.ObjectEntity.extend({
  
     ------ */
     update: function() {
+    	if (this.pos.y > 1000){
+    		
+    		alert("Game Over!");
+    		me.game.remove(this);
+    		me.levelDirector.loadLevel("level1");
+    	}
     	var res = me.game.collide(this);
     	if (res && (res.obj.type == me.game.WALL_OBJECT)){
     		 if (res.x != 0)
