@@ -12,6 +12,8 @@ var PlayerEntity = me.ObjectEntity.extend({
     init: function(x, y, settings) {
         // call the constructor
         this.parent(x, y, settings);
+        //this.vel.x = 0;
+		//this.vel.y = 0;
  
         // set the default horizontal & vertical speed (accel vector)
         this.setVelocity(5, 10);
@@ -28,9 +30,12 @@ var PlayerEntity = me.ObjectEntity.extend({
  
     ------ */
     update: function() {
+    	var speed = 1;
+    	var maxSpeed = 3;
+    	var sign = 1;
     	if (this.pos.y > 1000){
     		
-    		alert("Game Over!");
+    		//alert("Game Over!");
     		me.game.remove(this);
     		var currentLevel = me.levelDirector.getCurrentLevelId();
     		me.levelDirector.loadLevel(currentLevel);
@@ -54,13 +59,17 @@ var PlayerEntity = me.ObjectEntity.extend({
              }
     	}
       	
-
+			//if (!me.input.isKeyPressed('left') && !me.input.isKeyPressed('right') && !this.jumping){
+			//	this.vel.x = 0;
+			//}
            if (me.input.isKeyPressed('left')&&(walkleft == true)) {
         	
             // flip the sprite on horizontal axis
             this.flipX(true);
             // update the entity velocity
             this.vel.x -= this.accel.x * me.timer.tick;
+            //sign = -1;
+            //this.vel.x += sign * speed * me.timer.tick;
             walkright = true;
 
    
@@ -69,6 +78,8 @@ var PlayerEntity = me.ObjectEntity.extend({
             this.flipX(false);
             // update the entity velocity
             this.vel.x += this.accel.x * me.timer.tick;
+            //sign = 1;
+            //this.vel.x += sign * speed * me.timer.tick;
             walkleft = true;
 
         } else {
@@ -76,16 +87,23 @@ var PlayerEntity = me.ObjectEntity.extend({
         }
         if (me.input.isKeyPressed('jump')) {
             // make sure we are not already jumping or falling
-            if (!this.jumping && !this.falling) {
+             if (!this.jumping && !this.falling) {
                 // set current vel to the maximum defined value
                 // gravity will then do the rest
-                this.vel.y = -this.maxVel.y * me.timer.tick;
+                //this.vel.y = -this.maxVel.y * me.timer.tick;
+                this.vel.y -= 15 * me.timer.tick;
                 // set the jumping flag
                 this.jumping = true;
             }
- 
+			
+			
         }
-       
+        /*
+        this.pos.x += this.vel.x;
+        if(Math.abs(this.vel.x) > maxSpeed){
+        	this.vel.x = sign*maxSpeed;
+        } 
+       */
 
 
         
@@ -143,6 +161,9 @@ var PlayerEntity = me.ObjectEntity.extend({
         
     }   	  	 
 });
+//PlayerEntity.prototype.xvel = 0;
+//PlayerEntity.prototype.vel.x = 0;
+//PlayerEntity.prototype.vel.y = 0;
 var walkleft = true;
 var walkright = true;
 var bulletAlive = false;
