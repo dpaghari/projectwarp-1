@@ -40,9 +40,9 @@
     <property name="spritewidth" value="32"/>
    </properties>
   </object>
-  <object name="NoteEntity" x="1360" y="216" width="30" height="35">
+  <object name="NoteEntity" x="1345" y="220" width="30" height="35">
    <properties>
-    <property name="image" value="gun"/>
+    <property name="image" value="note"/>
     <property name="spritewidth" value="32"/>
    </properties>
   </object>

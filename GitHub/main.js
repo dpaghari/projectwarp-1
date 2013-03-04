@@ -68,6 +68,10 @@ var g_resources = [{
     type: "audio",
     src: "data/audio/",
     channel: 2
+},{
+	name: "note",
+	type: "image",
+	src: "data/note.png"
 }];
 var jsApp = {
 	/* ---
