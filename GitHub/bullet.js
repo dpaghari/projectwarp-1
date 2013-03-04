@@ -14,6 +14,7 @@ var BulletEntity = me.ObjectEntity.extend({
         var counter = 0;
         //this.setVelocity(10, 20);
         this.gravity = 0;
+        this.updateColRect(-1, 45, -1, 45);
         // returns current game time
         this.timeAlive = me.timer.getTime();							
         //me.input.mouse.pos()

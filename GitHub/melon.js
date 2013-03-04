@@ -10917,7 +10917,88 @@ var me = me || {};
 		 * res : result collision object
 		 * @private
 		 */
-		checkCollision : function(obj, pv) {
+		
+		checkCollision : function(obj, pv, sampling) {
+			if (sampling == undefined) {
+				sampling = 1;
+			}
+
+			var cur_left   = ~~(obj.left);
+			var cur_right  = Math.ceil(obj.right - 1);
+			var cur_top    = ~~(obj.top);
+			var cur_bottom = Math.ceil(obj.bottom - 1);
+
+			var new_left   = ~~(obj.left + pv.x);
+			var new_right  = Math.ceil(obj.right - 1 + pv.x);
+			var new_top    = ~~(obj.top + pv.y);
+			var new_bottom = Math.ceil(obj.bottom - 1 + pv.y);
+
+			var x = (pv.x < 0) ? new_left : new_right;
+			var y = (pv.y < 0) ? new_top : new_bottom;
+
+			var res = {
+				x : 0, // !=0 if collision on x axis
+				xtile : undefined,
+				xprop : {},
+				y : 0, // !=0 if collision on y axis
+				ytile : undefined,
+				yprop : {}
+			};
+
+			// check for x collisions
+			if (pv.x != 0 ) {
+				if (new_left <= 0 || new_right >= this.realwidth) {
+					res.x = pv.x;
+				} else {
+					var y_sampling = (cur_bottom - cur_top) / sampling
+					for (var yi = cur_top; yi <= cur_bottom; yi += y_sampling) {
+						res.xtile = this.getTile(x, ~~yi);
+						if (res.xtile && this.tileset.isTileCollidable(res.xtile.tileId)) {
+							res.x = pv.x; // reuse pv.x to get a 
+							res.xprop = this.tileset.getTileProperties(res.xtile.tileId);
+							break;
+						}
+					}
+				}
+			}
+
+			// check for y collisions
+			if (y <= 0 || y >= this.realheight) {
+				res.y = pv.y;
+			} else {
+				var x_sampling = (cur_right - cur_left) / sampling
+				for (var xi = cur_left; xi <= cur_right; xi += x_sampling) {
+					res.ytile = this.getTile(~~xi, y);
+					if (res.ytile && this.tileset.isTileCollidable(res.ytile.tileId)) {
+						res.y = pv.y;
+						res.yprop = this.tileset.getTileProperties(res.ytile.tileId);
+						break;
+					}
+				}
+			}
+
+			return res;
+		},
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*
+		checkCollision : function(obj, pv,) {
 
 			var x = (pv.x < 0) ? ~~(obj.left + pv.x) : Math.ceil(obj.right  - 1 + pv.x);
 			var y = (pv.y < 0) ? ~~(obj.top  + pv.y) : Math.ceil(obj.bottom - 1 + pv.y);
@@ -10968,6 +11049,7 @@ var me = me || {};
 			// return the collide object
 			return res;
 		},
+		*/
 		
 		/**
 		 * a dummy update function

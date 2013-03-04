@@ -110,10 +110,12 @@ var PlayerEntity = me.ObjectEntity.extend({
         
         
         if (me.input.isKeyPressed('shoot')) {
-        	if(bulletAlive == true){		//if bullet exists
+        	/*if(bulletAlive == true){		//if bullet exists
         		me.game.remove(bullet, true);		//remove it 
         		bulletAlive = false;
         	}
+        	*/
+        	if(bulletAlive == false){
         	//normalize vectors to make speed constant
         	mouseX = (me.input.mouse.pos.x+me.game.viewport.pos.x)-this.pos.x;		 //mouse x position + offset of viewport
         	mouseY = (me.input.mouse.pos.y+me.game.viewport.pos.y)-this.pos.y;		//mouse y position + offset of viewport
@@ -129,6 +131,7 @@ var PlayerEntity = me.ObjectEntity.extend({
       	  	me.game.sort();
     	  	bulletAlive = true;
        		//alert("lol");
+       		}
         }
 
         
