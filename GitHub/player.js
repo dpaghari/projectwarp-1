@@ -122,7 +122,7 @@ var PlayerEntity = me.ObjectEntity.extend({
         	speed = 5;
        		direction = new me.Vector2d(vectorX*speed, vectorY*speed);
        		//create bullet
-        	bullet = new BulletEntity(this.pos.x, this.pos.y, { image: 'bullet', spritewidth: 10 , spriteheight: 10});
+        	bullet = new BulletEntity(this.pos.x, this.pos.y, { image: 'bullet', spritewidth: 15 , spriteheight: 15});
         	bullet.vel = direction;
         	me.game.add(bullet, this.z);
       	  	me.game.sort();
