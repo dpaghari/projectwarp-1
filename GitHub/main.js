@@ -72,6 +72,10 @@ var g_resources = [{
 	name: "note",
 	type: "image",
 	src: "data/note.png"
+},{
+	name: "clear",
+	type: "image",
+	src: "data/clear.png"
 }];
 var jsApp = {
 	/* ---
@@ -89,7 +93,7 @@ var jsApp = {
 			return;
 		}
 		
-
+		//me.debug.renderHitBox = true;
 		// load everything & display a loading screen
 		me.state.change(me.state.LOADING);
 		
