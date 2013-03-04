@@ -14,6 +14,7 @@ var BulletEntity = me.ObjectEntity.extend({
         var counter = 0;
         //this.setVelocity(10, 20);
         this.gravity = 0;
+        this.updateColRect(-1, 45, -1, 45);
         // returns current game time
         this.timeAlive = me.timer.getTime();							
         //me.input.mouse.pos()
@@ -26,7 +27,7 @@ var BulletEntity = me.ObjectEntity.extend({
     ------ */
     update: function() {
     	var elapsedTime = me.timer.getTime() - this.timeAlive;	
-    	var collision = this.collisionMap.checkCollision(this.collisionBox, this.vel);
+    	var collision = this.updateMovement();
 		var res = me.game.collide(this);
     
         if (res && (res.obj.type == me.game.WALL_OBJECT)){
