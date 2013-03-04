@@ -17,10 +17,12 @@ var NoteEntity = me.CollectableEntity.extend({
     	var nextLevel = me.levelDirector.nextLevel();
         // do something when collected
         
+        alert("May 22, 2120: I have begun research on developing a prototype\n that will revolutionize both travel and combat in the new age.\n I will begin selecting participants soon. Winston seems like a rather \ncapable individual- he is incredibly gifted\n I will gather resources necessary to begin this project over this \ncoming fortnight..\n.~~Everything seemed fine when we worked together, you and I\nWe have accomplished so much, and learned a great deal...~~");
+        
         if(currentLevel == "level2"){
         	alert("Game over!");
         }
-        alert("May 22, 2120: I have begun research on developing a prototype\n that will revolutionize both travel and combat in the new age.\n I will begin selecting participants soon. Winston seems like a rather \ncapable individual- he is incredibly gifted\n I will gather resources necessary to begin this project over this \ncoming fortnight..\n.~~Everything seemed fine when we worked together, you and I\nWe have accomplished so much, and learned a great deal...~~");
+        
 		
  		me.levelDirector.loadLevel(nextLevel);
         // make sure it cannot be collected "again"
