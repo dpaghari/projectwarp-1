@@ -20,9 +20,13 @@ var g_resources = [{
 	type : "tmx",
 	src : "data/tileset/level1.tmx"
 },{
-	name: "level2",
-	type: "tmx",
-	src: "data/tileset/level2.tmx"
+	name : "level2",
+	type : "tmx",
+	src : "data/tileset/level2.tmx"
+},{
+	name : "level3",
+	type : "tmx",
+	src : "data/tileset/level3.tmx"
 },{
 	name : "loading_screen",
 	type : "image",
