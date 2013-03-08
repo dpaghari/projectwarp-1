@@ -1,7 +1,7 @@
 /*------------------- 
 a player entity
 -------------------------------- */
-var BulletEntity = me.ObjectEntity.extend({
+var SentryBulletEntity = me.ObjectEntity.extend({
  
     /* -----
  
@@ -11,15 +11,19 @@ var BulletEntity = me.ObjectEntity.extend({
     init: function(x, y, settings) {
         // call the constructor
         this.parent(x, y, settings);
-        var counter = 0;
+        this.collidable = true;
+        //var counter = 0;
         //this.setVelocity(10, 20);
         this.gravity = 0;
         // returns current game time
-        this.timeAlive = me.timer.getTime();
-        //console.log(settings.glassType); 							
+        this.timeAlive = me.timer.getTime();		
+        this.type = me.game.ENEMY_OBJECT;					
         //me.input.mouse.pos()
     },
     
+    onCollision: function(res, obj){
+    	
+    },
     /* -----
  
     update the player pos
@@ -29,7 +33,7 @@ var BulletEntity = me.ObjectEntity.extend({
     	var elapsedTime = me.timer.getTime() - this.timeAlive;	
     	var collision = this.collisionMap.checkCollision(this.collisionBox, this.vel);
 		var res = me.game.collide(this);
-    
+    /*
         if (res && (res.obj.type == me.game.WALL_OBJECT)){
        	      if (res.x != 0)
               {
@@ -48,41 +52,28 @@ var BulletEntity = me.ObjectEntity.extend({
                        }
                       
               }
-              if (res.y != 0)
-              {
-              	if (res.y > 0){
-              		direction = new me.Vector2d(vectorX*speed, -vectorY*speed);
-                           this.vel=direction;      
-                           me.audio.play("cling");
-              	}
-              	else{
-              		direction = new me.Vector2d(vectorX*speed, -vectorY*speed);
-                           this.vel=direction;      
-                           me.audio.play("cling");
-              	}
-              }
        }
-	    /*  
+	      
 	   if (!this.visible)
 	      {
 	      	me.audio.play("stomp"); 
 		    me.game.remove(this);
 		    
 	      }
-	   else */if (collision.yprop.isSolid||collision.xprop.isSolid)
+	   else if (collision.yprop.isSolid||collision.xprop.isSolid)
 	      {
 	      	me.audio.play("stomp"); 
 		    me.game.remove(this);
 			bulletAlive = false;
 		  
 	      }				
-    					
+    	*/				
     	// Bullet Lifetime				
     						
     	// If 1 second has passed					
     	if(elapsedTime > 1000){											
     		me.game.remove(this);
-    		bulletAlive = false;
+    		sbulletAlive = false;
     		
     	}
     	/*var count = me.timer.tick;
@@ -103,5 +94,5 @@ var BulletEntity = me.ObjectEntity.extend({
  
  
 });
-
-BulletEntity.prototype.timeAlive;
+SentryBulletEntity.prototype.timeAlive;
+//BulletEntity.prototype.timeAlive;

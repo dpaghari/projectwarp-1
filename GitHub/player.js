@@ -12,6 +12,7 @@ var PlayerEntity = me.ObjectEntity.extend({
     init: function(x, y, settings) {
         // call the constructor
         this.parent(x, y, settings);
+        
         //this.vel.x = 0;
 		//this.vel.y = 0;
  
@@ -38,6 +39,7 @@ var PlayerEntity = me.ObjectEntity.extend({
     		
     		//alert("Game Over!");
     		me.game.remove(this);
+    		bulletAlive = false;
     		var currentLevel = me.levelDirector.getCurrentLevelId();
     		me.levelDirector.loadLevel(currentLevel);
     	}
@@ -58,6 +60,15 @@ var PlayerEntity = me.ObjectEntity.extend({
                     }
                       
              }
+    	}
+    	
+    	if(res && (res.obj.type == me.game.ENEMY_OBJECT)){
+    		
+    		var currentLevel = me.levelDirector.getCurrentLevelId();
+    			me.game.remove(this);
+    			bulletAlive = false;
+    			me.levelDirector.loadLevel(currentLevel);
+    		
     	}
       	
 			//if (!me.input.isKeyPressed('left') && !me.input.isKeyPressed('right') && !this.jumping){
@@ -165,9 +176,12 @@ var PlayerEntity = me.ObjectEntity.extend({
         
     }   	  	 
 });
+//PlayerEntity.prototype.pos.x;
+//PlayerEntity.prototype.pos.y;
 //PlayerEntity.prototype.xvel = 0;
 //PlayerEntity.prototype.vel.x = 0;
 //PlayerEntity.prototype.vel.y = 0;
+
 var walkleft = true;
 var walkright = true;
 var bulletAlive = false;

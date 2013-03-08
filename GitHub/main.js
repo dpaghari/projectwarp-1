@@ -20,13 +20,9 @@ var g_resources = [{
 	type : "tmx",
 	src : "data/tileset/level1.tmx"
 },{
-	name : "level2",
-	type : "tmx",
-	src : "data/tileset/level2.tmx"
-},{
-	name : "level3",
-	type : "tmx",
-	src : "data/tileset/level3.tmx"
+	name: "level2",
+	type: "tmx",
+	src: "data/tileset/level2.tmx"
 },{
 	name : "loading_screen",
 	type : "image",
@@ -80,6 +76,10 @@ var g_resources = [{
 	name: "clear",
 	type: "image",
 	src: "data/clear.png"
+},{
+	name: "sentrygun",
+	type: "image",
+	src: "data/turret_test.png"
 }];
 var jsApp = {
 	/* ---
@@ -137,6 +137,8 @@ var jsApp = {
 		me.entityPool.add("mainPlayer", PlayerEntity);
 		me.entityPool.add("NoteEntity", NoteEntity);
 		me.entityPool.add("glassWall", glassWallEntity);
+		me.entityPool.add("SentryGunEntity", SentryGunEntity,true);
+		me.entityPool.add("LaserEntity", LaserEntity, true);
 		
 		
 		// enable the keyboard
@@ -147,6 +149,7 @@ var jsApp = {
 		me.input.bindKey(me.input.KEY.U, "shoot", true);
 		me.input.bindKey(me.input.KEY.ESCAPE, "escape", true);
 		me.input.bindMouse(me.input.mouse.LEFT, me.input.KEY.U);
+		
 
 		// start the game
 		me.state.change(me.state.MENU);
@@ -168,8 +171,9 @@ var PlayScreen = me.ScreenObject.extend({
 		// loads previous level
 		me.levelDirector.loadLevel("level1");
 		
+		
 		//Find a cleaner way to make the song repeat...
-		me.audio.playTrack("mysterious caves", 5);
+		me.audio.playTrack("mysterious caves", 2);
 
 		if (me.input.isKeyPressed('escape')){
 			me.state.change(me.state.PAUSE);

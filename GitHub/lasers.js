@@ -1,7 +1,7 @@
 /*------------------- 
 a player entity
 -------------------------------- */
-var LaserEntity = me.CollectableEntity.extend({
+var LaserEntity = me.ObjectEntity.extend({
  
     /* -----
  
@@ -10,8 +10,11 @@ var LaserEntity = me.CollectableEntity.extend({
     ------ */
     init: function(x, y, settings) {
         // call the constructor
+        //this.gravity = 0;
         this.parent(x, y, settings);
-        
+        this.collidable = true;
+
+        this.type = me.game.ENEMY_OBJECT;	
         
         //this.setVelocity(10, 20);
         
@@ -26,28 +29,24 @@ var LaserEntity = me.CollectableEntity.extend({
     	
     },
     */
+   onCollision: function(res, obj) {
+    	
+   },
     /* -----
  
     update the player pos
  
     ------ */
     update: function() {
-    
-    	this.updateMovement();
+    	var collision = this.collisionMap.checkCollision(this.collisionBox, this.vel);
+		var res = me.game.collide(this);
+    	//this.updateMovement();
     	
  	}
  	
  	// this function is called by the engine, when
     // an object is touched by something (here collected)
-    onCollision: function() {
-    	var nextLevel = me.levelDirector.nextLevel();
-        // do something when collected
- 		me.levelDirector.loadLevel(currentLevel);
-        // make sure it cannot be collected "again"
-        this.collidable = false;
-        // remove it
-        me.game.remove(this);
-    }
+    
  
  
 });
