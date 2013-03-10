@@ -34,7 +34,7 @@
   </data>
  </layer>
  <objectgroup name="Entities" width="45" height="30">
-  <object name="mainPlayer" x="41" y="239" width="38" height="46">
+  <object name="mainPlayer" x="96" y="192" width="32" height="64">
    <properties>
     <property name="image" value="player_stand"/>
     <property name="spritewidth" value="32"/>

@@ -12,6 +12,9 @@ var PlayerEntity = me.ObjectEntity.extend({
     init: function(x, y, settings) {
         // call the constructor
         this.parent(x, y, settings);
+        var animate = new me.AnimationSheet(0,0,"player_run",32,44 );
+        
+        this.addAnimation("run", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,17,18,19,20,21,22]);
         
         //this.vel.x = 0;
 		//this.vel.y = 0;
@@ -75,7 +78,7 @@ var PlayerEntity = me.ObjectEntity.extend({
 			//	this.vel.x = 0;
 			//}
            if (me.input.isKeyPressed('left')&&(walkleft == true)) {
-        	
+        	this.setCurrentAnimation("run");
             // flip the sprite on horizontal axis
             this.flipX(true);
             // update the entity velocity
@@ -87,6 +90,7 @@ var PlayerEntity = me.ObjectEntity.extend({
    
            } else if (me.input.isKeyPressed('right')&&(walkright == true)) {
             // unflip the sprite
+            this.setCurrentAnimation("run");
             this.flipX(false);
             // update the entity velocity
             this.vel.x += this.accel.x * me.timer.tick;

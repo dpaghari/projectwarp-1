@@ -18,11 +18,11 @@ var TitleScreen = me.ScreenObject.extend({
 		this.title         = null;
 		
 		this.font          =  null;
-		this.scrollerfont  =  null;
-		this.scrollertween = null;
+		//this.scrollerfont  =  null;
+		//this.scrollertween = null;
 		
-		this.scroller = "DEVELOPED BY SUPERAWESOMEMEGASQUAD - 2013";
-		this.scrollerpos = 740;   //(canvas.height) - 560?
+		//this.scroller = "DEVELOPED BY SUPERAWESOMEMEGASQUAD - 2013";
+		//this.scrollerpos = 740;   //(canvas.height) - 560?
 	},
 	/* ---
 		reset function
@@ -39,16 +39,16 @@ var TitleScreen = me.ScreenObject.extend({
 			this.font.set("left");
 			
 			// set the scroller
-			this.scrollerfont = new me.BitmapFont("32x32_font", 32);
-			this.scrollerfont.set("left");
+			//this.scrollerfont = new me.BitmapFont("32x32_font", 32);
+			//this.scrollerfont.set("left");
 						
 		}
       
 		// reset to default value
-		this.scrollerpos = 740;
+		//this.scrollerpos = 740;
 		
 		// a tween to animate the arrow
-		this.scrollertween = new me.Tween(this).to({scrollerpos: -2200 }, 10000).onComplete(this.scrollover.bind(this)).start();
+		//this.scrollertween = new me.Tween(this).to({scrollerpos: -2200 }, 10000).onComplete(this.scrollover.bind(this)).start();
 		
 		// enable the keyboard
 		me.input.bindKey(me.input.KEY.ENTER, "enter", true);
@@ -59,13 +59,13 @@ var TitleScreen = me.ScreenObject.extend({
 	},
 	
 	// some callback for the tween objects
-	scrollover : function()
+	/*scrollover : function()
 	{
 		// reset to default value
 		this.scrollerpos = 740;
 		this.scrollertween.to({scrollerpos: -2200 }, 10000).onComplete(this.scrollover.bind(this)).start();
 	},
-		
+	*/	
 	//Update function	
 	update : function()
 	{
@@ -87,7 +87,7 @@ var TitleScreen = me.ScreenObject.extend({
 		context.drawImage(this.title, 0,0);
 		
 		this.font.draw (context, "PRESS ENTER TO PLAY!", 70, 330);
-		this.scrollerfont.draw(context, this.scroller, this.scrollerpos, 440);
+		//this.scrollerfont.draw(context, this.scroller, this.scrollerpos, 440);
 		
 		//this.font.draw (context, "LOAD GAME", 390, 330);
 		//this.scrollerfont.draw(context, this.scroller, this.scrollerpos, 440);
@@ -102,7 +102,7 @@ var TitleScreen = me.ScreenObject.extend({
 		me.input.unbindKey(me.input.KEY.ENTER);
 		
 		//just in case
-		this.scrollertween.stop();
+		//this.scrollertween.stop();
     }
 
 });

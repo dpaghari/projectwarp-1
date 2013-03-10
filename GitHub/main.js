@@ -18,19 +18,15 @@ var g_resources = [{
 	//Levels go here
 	name : "level1",
 	type : "tmx",
-	src : "data/tileset/level1.tmx"
+	src : "data/levels/level1.tmx"
 },{
 	name: "level2",
 	type: "tmx",
-	src: "data/tileset/level2.tmx"
+	src: "data/levels/level2.tmx"
 },{
 	name: "level3",
 	type: "tmx",
-	src: "data/tileset/level3.tmx"
-},{
-	name: "level4",
-	type: "tmx",
-	src: "data/tileset/level4.tmx"
+	src: "data/levels/level3.tmx"
 },{
 	name : "loading_screen",
 	type : "image",
@@ -43,7 +39,11 @@ var g_resources = [{
 	name : "player_stand",
 	type : "image",
 	src : "data/player_new.png"
-}, {
+},{
+	name: "player_run",
+	type: "image",
+	src: "data/player_sheet.png"
+},{
 	name : "bullet",
 	type : "image",
 	src : "data/bullet.png"
@@ -100,7 +100,8 @@ var g_resources = [{
 	name: "sentrygun",
 	type: "image",
 	src: "data/turret_test.png"
-}];
+}
+];
 var jsApp = {
 	/* ---
 
