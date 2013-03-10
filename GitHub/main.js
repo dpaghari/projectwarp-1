@@ -24,6 +24,14 @@ var g_resources = [{
 	type: "tmx",
 	src: "data/tileset/level2.tmx"
 },{
+	name: "level3",
+	type: "tmx",
+	src: "data/tileset/level3.tmx"
+},{
+	name: "level4",
+	type: "tmx",
+	src: "data/tileset/level4.tmx"
+},{
 	name : "loading_screen",
 	type : "image",
 	src : "data/loading_screen.jpg"
@@ -60,7 +68,7 @@ var g_resources = [{
 	type : "image",
 	src : "data/player.png"
 }, {
-	name: "mysterious caves",
+	name: "HerbieHancockNoBu",
 	type: "audio",
 	src: "data/audio/"
 },{
@@ -183,12 +191,12 @@ var PlayScreen = me.ScreenObject.extend({
 
 	onResetEvent : function() {
 		// loads previous level
-		me.levelDirector.loadLevel("level1");
+		me.levelDirector.loadLevel("level2");
 		me.sys.gravity = 0.98;
 		
 		
 		//Find a cleaner way to make the song repeat...
-		me.audio.playTrack("mysterious caves", 2);
+		me.audio.playTrack("HerbieHancockNoBu", 2);
 
 		if (me.input.isKeyPressed('escape')){
 			me.state.change(me.state.PAUSE);
