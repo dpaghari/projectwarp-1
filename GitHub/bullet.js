@@ -14,7 +14,9 @@ var BulletEntity = me.ObjectEntity.extend({
         var counter = 0;
         //this.setVelocity(10, 20);
         this.gravity = 0;
+        this.collidable = true;
         // returns current game time
+        this.speed = 10;
         this.timeAlive = me.timer.getTime();
         //console.log(settings.glassType); 							
         //me.input.mouse.pos()
@@ -30,12 +32,12 @@ var BulletEntity = me.ObjectEntity.extend({
     	var collision = this.collisionMap.checkCollision(this.collisionBox, this.vel);
 		var res = me.game.collide(this);
     
-        if (res && (res.obj.type == me.game.WALL_OBJECT)){
+        if (res && (res.obj.type === "glassWallv")){											// if the bullet hits a vertical glass wall
        	      if (res.x != 0)
               {
                            // x axis
-                       if (res.x<0){
-                           direction = new me.Vector2d(-vectorX*speed, vectorY*speed);
+                       if (res.x<0){																
+                           direction = new me.Vector2d(-vectorX*speed, vectorY*speed);				// reverse the direction of the bullet
                            this.vel=direction;      
                            me.audio.play("cling");     
                        }
@@ -48,10 +50,14 @@ var BulletEntity = me.ObjectEntity.extend({
                        }
                       
               }
-              if (res.y != 0)
+           
+       }
+	    
+	   if (res && (res.obj.type === "glassWallh")){											// if the bullet hits a horizontal glass wall
+	   	   if (res.y != 0)
               {
               	if (res.y > 0){
-              		direction = new me.Vector2d(vectorX*speed, -vectorY*speed);
+              		direction = new me.Vector2d(vectorX*speed, -vectorY*speed);						// reverse the direction of the bullet
                            this.vel=direction;      
                            me.audio.play("cling");
               	}
@@ -61,15 +67,48 @@ var BulletEntity = me.ObjectEntity.extend({
                            me.audio.play("cling");
               	}
               }
-       }
-	    /*  
-	   if (!this.visible)
-	      {
-	      	me.audio.play("stomp"); 
-		    me.game.remove(this);
-		    
-	      }
-	   else */if (collision.yprop.isSolid||collision.xprop.isSolid)
+	   	
+	   } 
+	   if (res && (res.obj.type == "rubberWallv")){											// if the bullet hits a vertical rubber wall
+       	      if (res.x != 0)
+              {
+                           // x axis
+                       if (res.x<0){																// kill the bullet's velocity
+                           direction = new me.Vector2d(0, 0);
+                           this.vel=direction;   
+                           this.gravity = this.speed;  
+                           
+                       }
+                    
+                       
+                       else{
+                           direction = new me.Vector2d(0, 0);
+                           this.vel=direction;   
+                           this.gravity = this.speed;
+                                  	
+                       }
+                      
+              }
+             /* if (res.y != 0)
+              {
+              	if (res.y > 0){
+              		me.game.remove(this);
+              		bulletAlive = false;
+              	}
+              	else{
+              		me.game.remove(this);
+              		bulletAlive = false;
+              	}
+              }
+              */
+           
+       } 
+	 
+	    
+	    
+	    
+	    
+	    if (collision.yprop.isSolid||collision.xprop.isSolid)
 	      {
 	      	me.audio.play("stomp"); 
 		    me.game.remove(this);
@@ -80,7 +119,7 @@ var BulletEntity = me.ObjectEntity.extend({
     	// Bullet Lifetime				
     						
     	// If 1 second has passed					
-    	if(elapsedTime > 1000){											
+    	if(elapsedTime > 1500){											
     		me.game.remove(this);
     		bulletAlive = false;
     		

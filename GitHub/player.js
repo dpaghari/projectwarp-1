@@ -44,7 +44,7 @@ var PlayerEntity = me.ObjectEntity.extend({
     		me.levelDirector.loadLevel(currentLevel);
     	}
     	var res = me.game.collide(this);
-    	if (res && (res.obj.type == me.game.WALL_OBJECT)){
+    	/*if (res && (res.obj.type == me.game.WALL_OBJECT)){
     		 if (res.x != 0)
              {
                  // x axis
@@ -61,7 +61,7 @@ var PlayerEntity = me.ObjectEntity.extend({
                       
              }
     	}
-    	
+    	*/
     	if(res && (res.obj.type == me.game.ENEMY_OBJECT)){
     		
     		var currentLevel = me.levelDirector.getCurrentLevelId();

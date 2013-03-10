@@ -77,6 +77,18 @@ var g_resources = [{
 	type: "image",
 	src: "data/clear.png"
 },{
+	name: "clearh",
+	type: "image",
+	src: "data/clearh.png"
+},{
+	name: "clearv",
+	type: "image",
+	src: "data/clearv.png"
+},{
+	name: "rubberv",
+	type: "image",
+	src: "data/rubberv.png"
+},{
 	name: "sentrygun",
 	type: "image",
 	src: "data/turret_test.png"
@@ -135,8 +147,10 @@ var jsApp = {
 
 		// add our player entity in the entity pool
 		me.entityPool.add("mainPlayer", PlayerEntity);
-		me.entityPool.add("NoteEntity", NoteEntity);
-		me.entityPool.add("glassWall", glassWallEntity);
+		me.entityPool.add("NoteEntity", NoteEntity, true);
+		me.entityPool.add("glassWallh", glassWallhEntity, true);
+		me.entityPool.add("glassWallv", glassWallvEntity, true);
+		me.entityPool.add("rubberWallv", rubberWallvEntity, true);
 		me.entityPool.add("SentryGunEntity", SentryGunEntity,true);
 		me.entityPool.add("LaserEntity", LaserEntity, true);
 		
@@ -170,6 +184,7 @@ var PlayScreen = me.ScreenObject.extend({
 	onResetEvent : function() {
 		// loads previous level
 		me.levelDirector.loadLevel("level1");
+		me.sys.gravity = 0.98;
 		
 		
 		//Find a cleaner way to make the song repeat...

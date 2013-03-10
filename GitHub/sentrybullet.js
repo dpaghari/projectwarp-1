@@ -33,41 +33,7 @@ var SentryBulletEntity = me.ObjectEntity.extend({
     	var elapsedTime = me.timer.getTime() - this.timeAlive;	
     	var collision = this.collisionMap.checkCollision(this.collisionBox, this.vel);
 		var res = me.game.collide(this);
-    /*
-        if (res && (res.obj.type == me.game.WALL_OBJECT)){
-       	      if (res.x != 0)
-              {
-                           // x axis
-                       if (res.x<0){
-                           direction = new me.Vector2d(-vectorX*speed, vectorY*speed);
-                           this.vel=direction;      
-                           me.audio.play("cling");     
-                       }
-                    
-                       
-                       else{
-                           direction = new me.Vector2d(-vectorX*speed, vectorY*speed);
-                           this.vel=direction;   
-                           me.audio.play("cling");            	
-                       }
-                      
-              }
-       }
-	      
-	   if (!this.visible)
-	      {
-	      	me.audio.play("stomp"); 
-		    me.game.remove(this);
-		    
-	      }
-	   else if (collision.yprop.isSolid||collision.xprop.isSolid)
-	      {
-	      	me.audio.play("stomp"); 
-		    me.game.remove(this);
-			bulletAlive = false;
-		  
-	      }				
-    	*/				
+  			
     	// Bullet Lifetime				
     						
     	// If 1 second has passed					

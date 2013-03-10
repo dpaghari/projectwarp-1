@@ -1,11 +1,11 @@
-var glassWallEntity = me.ObjectEntity.extend({
+var glassWallhEntity = me.ObjectEntity.extend({
     // extending the init function is not mandatory
     // unless you need to add some extra initialization
     init: function(x, y, settings) {
         // call the parent constructor
         this.parent(x, y, settings);
         this.collidable = true;
-        this.type = me.game.WALL_OBJECT;
+        this.type = "glassWallh";
         this.gravity = 0;
     },
     onCollision: function(res, obj) {
