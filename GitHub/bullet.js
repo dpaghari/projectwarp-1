@@ -9,17 +9,20 @@ var BulletEntity = me.ObjectEntity.extend({
  
     ------ */
     init: function(x, y, settings) {
+    	settings.spritewidth = 14;
+    	settings.spriteheight = 14;
         // call the constructor
         this.parent(x, y, settings);
         var counter = 0;
+        this.animationspeed = 1;
+        this.addAnimation("fly",[0,1,2,3,4,5,6,7,8,9,10,11]);
         //this.setVelocity(10, 20);
         this.gravity = 0;
         this.collidable = true;
         // returns current game time
         this.speed = 10;
         this.timeAlive = me.timer.getTime();
-        //console.log(settings.glassType); 							
-        //me.input.mouse.pos()
+       
     },
     
     /* -----
@@ -31,6 +34,10 @@ var BulletEntity = me.ObjectEntity.extend({
     	var elapsedTime = me.timer.getTime() - this.timeAlive;	
     	var collision = this.collisionMap.checkCollision(this.collisionBox, this.vel);
 		var res = me.game.collide(this);
+		
+    
+    
+    
     
         if (res && (res.obj.type === "glassWallv")){											// if the bullet hits a vertical glass wall
        	      if (res.x != 0)
@@ -89,18 +96,7 @@ var BulletEntity = me.ObjectEntity.extend({
                        }
                       
               }
-             /* if (res.y != 0)
-              {
-              	if (res.y > 0){
-              		me.game.remove(this);
-              		bulletAlive = false;
-              	}
-              	else{
-              		me.game.remove(this);
-              		bulletAlive = false;
-              	}
-              }
-              */
+         
            
        } 
 	 
@@ -124,19 +120,15 @@ var BulletEntity = me.ObjectEntity.extend({
     		bulletAlive = false;
     		
     	}
-    	/*var count = me.timer.tick;
-    	for(i = count; i < 60; i++){
-    		if(count % 4 == 0){
-    			me.game.remove(this);
-    		}
-    		
-    	}
-    	*/
-   		
-    	//if(this.collideType(solid, false)){
-    	//	me.game.remove(this, true);
-    	//}   	 
     	this.updateMovement();
+		if(this.vel.x != 0 || this.vel.y != 0){
+			this.setCurrentAnimation("fly");
+			this.parent();
+			return true;
+		}  	 
+		
+		return false;
+    	
     	
  	}
  

@@ -10,19 +10,25 @@ var PlayerEntity = me.ObjectEntity.extend({
     ------ */
  
     init: function(x, y, settings) {
+    	settings.spritewidth = 32;
+    	settings.spriteheight = 44;
         // call the constructor
         this.parent(x, y, settings);
-        var animate = new me.AnimationSheet(0,0,"player_run",32,44 );
+        this.animationspeed = 1;
         
-        this.addAnimation("run", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,17,18,19,20,21,22]);
+        this.addAnimation("stand",[0]);
+        this.addAnimation("run",[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22]);
         
-        //this.vel.x = 0;
-		//this.vel.y = 0;
- 
+        
+        
+        
+        
+        
+ 		this.gravity = 0.98;
         // set the default horizontal & vertical speed (accel vector)
-        this.setVelocity(3.5, 8);
-
- 
+        this.setVelocity(4, 12);
+		//this.setCurrentAnimation("stand");
+ 		this.updateColRect(-1, 32, -1, 44);
         // set the display to follow our position on both axis
         me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 		
@@ -34,51 +40,9 @@ var PlayerEntity = me.ObjectEntity.extend({
  
     ------ */
     update: function() {
-    	/*var speed = 1;
-    	var maxSpeed = 3;
-    	var sign = 1;
-    	*/
-    	if (this.pos.y > 1000){
-    		
-    		//alert("Game Over!");
-    		me.game.remove(this);
-    		bulletAlive = false;
-    		var currentLevel = me.levelDirector.getCurrentLevelId();
-    		me.levelDirector.loadLevel(currentLevel);
-    	}
-    	var res = me.game.collide(this);
-    	/*if (res && (res.obj.type == me.game.WALL_OBJECT)){
-    		 if (res.x != 0)
-             {
-                 // x axis
-                    if (res.x<0){
-                    	 walkleft = false;
-			             walkright= true;
-                    }
-                    
-                       
-                    else{
-                    	 walkleft = true;
-			             walkright= false;                    	
-                    }
-                      
-             }
-    	}
-    	*/
-    	if(res && (res.obj.type == me.game.ENEMY_OBJECT)){
-    		
-    		var currentLevel = me.levelDirector.getCurrentLevelId();
-    			me.game.remove(this);
-    			bulletAlive = false;
-    			me.levelDirector.loadLevel(currentLevel);
-    		
-    	}
-      	
-			//if (!me.input.isKeyPressed('left') && !me.input.isKeyPressed('right') && !this.jumping){
-			//	this.vel.x = 0;
-			//}
+		
            if (me.input.isKeyPressed('left')&&(walkleft == true)) {
-        	this.setCurrentAnimation("run");
+        
             // flip the sprite on horizontal axis
             this.flipX(true);
             // update the entity velocity
@@ -90,10 +54,10 @@ var PlayerEntity = me.ObjectEntity.extend({
    
            } else if (me.input.isKeyPressed('right')&&(walkright == true)) {
             // unflip the sprite
-            this.setCurrentAnimation("run");
+            
             this.flipX(false);
             // update the entity velocity
-            this.vel.x += this.accel.x * me.timer.tick;
+            this.vel.x += this.accel.x* me.timer.tick;
             //sign = 1;
             //this.vel.x += sign * speed * me.timer.tick;
             walkleft = true;
@@ -114,15 +78,6 @@ var PlayerEntity = me.ObjectEntity.extend({
 			
 			
         }
-        /*
-        this.pos.x += this.vel.x;
-        if(Math.abs(this.vel.x) > maxSpeed){
-        	this.vel.x = sign*maxSpeed;
-        } 
-       */
-
-
-        
         
         if (me.input.isKeyPressed('shoot')) {
         	/*if(bulletAlive == true){		//if bullet exists
@@ -140,7 +95,7 @@ var PlayerEntity = me.ObjectEntity.extend({
         	speed = 10;
        		direction = new me.Vector2d(vectorX*speed, vectorY*speed);
        		//create bullet
-        	bullet = new BulletEntity(this.pos.x, this.pos.y, { image: 'bullet', spritewidth: 15 , spriteheight: 15});
+        	bullet = new BulletEntity(this.pos.x, this.pos.y, { image: 'bullet', spritewidth: 14 , spriteheight: 14});
         	bullet.vel = direction;
         	me.game.add(bullet, this.z);
       	  	me.game.sort();
@@ -161,21 +116,56 @@ var PlayerEntity = me.ObjectEntity.extend({
         	me.game.remove(bullet, true);
         	}
         }
-        
+          if (this.pos.y > 1000){
+    		
+    		//alert("Game Over!");
+    		me.game.remove(this);
+    		bulletAlive = false;
+    		var currentLevel = me.levelDirector.getCurrentLevelId();
+    		me.levelDirector.loadLevel(currentLevel);
+    	}
  
         // check & update player movement
         this.updateMovement();
+        
+      
+    	var res = me.game.collide(this);
+   
+    	if(res && (res.obj.type == me.game.ENEMY_OBJECT)){
+    		
+    		var currentLevel = me.levelDirector.getCurrentLevelId();
+    			me.game.remove(this);
+    			bulletAlive = false;
+    			me.levelDirector.loadLevel(currentLevel);
+    		
+    	}
  
         // update animation if necessary
-        if (this.vel.x!=0 || this.vel.y!=0) {
+        if (this.vel.x!=0 && this.vel.y==0) {
             // update object animation
+            this.setCurrentAnimation("run");
             this.parent();
             return true;
+        }
+        else if (this.vel.y != 0 && this.vel.x !=0){
+        	this.setCurrentAnimation("stand");
+        	this.parent();
+        	return true;
+        }
+        else if(this.vel.y != 0 && this.vel.x == 0){
+        	this.setCurrentAnimation("stand");
+        	this.parent();
+        	return true;
+        }
+        else{
+        	this.setCurrentAnimation("stand");
+        	this.parent();
+        	return true;
         }
          
         // else inform the engine we did not perform
         // any update (e.g. position, animation)
-        return true;
+        return false;
         
         
     }   	  	 

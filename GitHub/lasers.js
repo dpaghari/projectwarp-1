@@ -39,7 +39,7 @@ var LaserEntity = me.ObjectEntity.extend({
     ------ */
     update: function() {
     	var collision = this.collisionMap.checkCollision(this.collisionBox, this.vel);
-		var res = me.game.collide(this);
+		//var res = me.game.collide(this);
     	//this.updateMovement();
     	
  	}

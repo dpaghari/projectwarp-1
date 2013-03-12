@@ -32,14 +32,16 @@ var SentryBulletEntity = me.ObjectEntity.extend({
     update: function() {
     	var elapsedTime = me.timer.getTime() - this.timeAlive;	
     	var collision = this.collisionMap.checkCollision(this.collisionBox, this.vel);
-		var res = me.game.collide(this);
+		//var res = me.game.collide(this);
   			
     	// Bullet Lifetime				
     						
     	// If 1 second has passed					
-    	if(elapsedTime > 1000){											
+    	if(elapsedTime > 1000){		
+    		sbulletAlive = false;									
     		me.game.remove(this);
-    		sbulletAlive = false;
+    		
+    		me.game.sort();
     		
     	}
     	/*var count = me.timer.tick;

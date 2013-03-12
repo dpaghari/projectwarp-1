@@ -18,15 +18,19 @@ var g_resources = [{
 	//Levels go here
 	name : "level1",
 	type : "tmx",
-	src : "data/levels/level1.tmx"
+	src : "data/tileset/level1.tmx"
 },{
 	name: "level2",
 	type: "tmx",
-	src: "data/levels/level2.tmx"
+	src: "data/tileset/level2.tmx"
 },{
 	name: "level3",
 	type: "tmx",
-	src: "data/levels/level3.tmx"
+	src: "data/tileset/level3.tmx"
+},{
+	name : "level4",
+	type: "tmx",
+	src: "data/tileset/level4.tmx"
 },{
 	name : "loading_screen",
 	type : "image",
@@ -36,21 +40,17 @@ var g_resources = [{
 	type: "image",
 	src: "data/tileset/metatiles32x32.png"
 },{
-	name : "player_stand",
+	name : "player_sheet",
 	type : "image",
-	src : "data/player_new.png"
-},{
-	name: "player_run",
-	type: "image",
-	src: "data/player_sheet.png"
-},{
+	src : "data/player_sheetnew.png"
+}, {
 	name : "bullet",
 	type : "image",
-	src : "data/bullet.png"
+	src : "data/bullet_sheet.png"
 }, {
 	name : "gun",
 	type : "image",
-	src : "data/gun.png"
+	src : "data/bullet.png"
 }, {
 	name : "title_screen",
 	type : "image",
@@ -68,7 +68,7 @@ var g_resources = [{
 	type : "image",
 	src : "data/player.png"
 }, {
-	name: "HerbieHancockNoBu",
+	name: "mysterious caves",
 	type: "audio",
 	src: "data/audio/"
 },{
@@ -100,8 +100,7 @@ var g_resources = [{
 	name: "sentrygun",
 	type: "image",
 	src: "data/turret_test.png"
-}
-];
+}];
 var jsApp = {
 	/* ---
 
@@ -152,7 +151,7 @@ var jsApp = {
 		me.state.set(me.state.LOADING, new CustomLoadingScreen());
 
 		// set a global fading transition for the screen
-		me.state.transition("fade", "#0FFFFF", 250);
+		me.state.transition("fade", "#FFFFFF", 250);
 
 		// add our player entity in the entity pool
 		me.entityPool.add("mainPlayer", PlayerEntity);
@@ -160,7 +159,8 @@ var jsApp = {
 		me.entityPool.add("glassWallh", glassWallhEntity, true);
 		me.entityPool.add("glassWallv", glassWallvEntity, true);
 		me.entityPool.add("rubberWallv", rubberWallvEntity, true);
-		me.entityPool.add("SentryGunEntity", SentryGunEntity,true);
+		me.entityPool.add("SentryGunEntity", SentryGunEntity);
+		me.entityPool.add("sentrybullet", SentryBulletEntity, true);
 		me.entityPool.add("LaserEntity", LaserEntity, true);
 		
 		
@@ -192,16 +192,18 @@ var PlayScreen = me.ScreenObject.extend({
 
 	onResetEvent : function() {
 		// loads previous level
-		me.levelDirector.loadLevel("level2");
+		me.levelDirector.loadLevel("level1");
 		me.sys.gravity = 0.98;
+		me.sys.fps = 60;
 		
 		
 		//Find a cleaner way to make the song repeat...
-		me.audio.playTrack("HerbieHancockNoBu", 2);
+		me.audio.playTrack("mysterious caves", 0);
 
 		if (me.input.isKeyPressed('escape')){
 			me.state.change(me.state.PAUSE);
 		}
+		me.game.sort();
 	},
 
 	//CollectableEntity.onCollision(labNoteVector, PlayerEntity);
@@ -213,11 +215,11 @@ var PlayScreen = me.ScreenObject.extend({
 	onDestroyEvent : function() {
 		
 		//Go to the pause screen when ESCAPE is pressed
-		me.input.bindKey(me.input.KEY.ESCAPE);
-		me.state.change(me.state.PAUSE);
+		//me.input.bindKey(me.input.KEY.ESCAPE);
+		//me.state.change(me.state.PAUSE);
 
 		//just in case
-		this.scrollertween.stop();
+		//this.scrollertween.stop();
 	}
 	
 	/*
