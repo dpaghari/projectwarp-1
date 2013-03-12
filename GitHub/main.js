@@ -42,15 +42,15 @@ var g_resources = [{
 },{
 	name : "player_sheet",
 	type : "image",
-	src : "data/player_sheetnew.png"
+	src : "data/Art/player_sheetnew.png"
 }, {
 	name : "bullet",
 	type : "image",
-	src : "data/bullet_sheet.png"
+	src : "data/Art/bullet_sheet.png"
 }, {
 	name : "gun",
 	type : "image",
-	src : "data/bullet.png"
+	src : "data/Art/bullet.png"
 }, {
 	name : "title_screen",
 	type : "image",
@@ -58,16 +58,12 @@ var g_resources = [{
 }, {
 	name : "32x32_font",
 	type : "image",
-	src : "data/sprite/32x32_font.png"
+	src : "data/bitmap_fonts/32x32_font.png"
 }, {
 	name: "stomp",
 	type: "audio",
 	src: "data/audio/"
 },{
-    name : "glassWall",
-	type : "image",
-	src : "data/player.png"
-}, {
 	name: "mysterious caves",
 	type: "audio",
 	src: "data/audio/"
@@ -79,27 +75,27 @@ var g_resources = [{
 },{
 	name: "note",
 	type: "image",
-	src: "data/note.png"
+	src: "data/Art/note.png"
 },{
 	name: "clear",
 	type: "image",
-	src: "data/clear.png"
+	src: "data/Art/clear.png"
 },{
 	name: "clearh",
 	type: "image",
-	src: "data/clearh.png"
+	src: "data/Art/clearh.png"
 },{
 	name: "clearv",
 	type: "image",
-	src: "data/clearv.png"
+	src: "data/Art/clearv.png"
 },{
 	name: "rubberv",
 	type: "image",
-	src: "data/rubberv.png"
+	src: "data/Art/rubberv.png"
 },{
 	name: "sentrygun",
 	type: "image",
-	src: "data/turret_test.png"
+	src: "data/Art/turret_test.png"
 }];
 var jsApp = {
 	/* ---
@@ -198,7 +194,7 @@ var PlayScreen = me.ScreenObject.extend({
 		
 		
 		//Find a cleaner way to make the song repeat...
-		me.audio.playTrack("mysterious caves", 0);
+		//me.audio.playTrack("mysterious caves", 0);
 
 		if (me.input.isKeyPressed('escape')){
 			me.state.change(me.state.PAUSE);
