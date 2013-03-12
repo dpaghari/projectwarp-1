@@ -1,6 +1,13 @@
-/*------------------- 
-a player entity
--------------------------------- */
+/*
+ * Project Warp
+ * 
+ * lasers.js
+ * Controls the laser entity.
+ * 
+ * Developed by Superawesomemegasquad
+ */
+
+
 var LaserEntity = me.ObjectEntity.extend({
  
     /* -----

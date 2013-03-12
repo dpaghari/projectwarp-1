@@ -1,6 +1,13 @@
-/*------------------- 
-a player entity
--------------------------------- */
+/*
+ * Project Warp
+ * 
+ * sentrygun.js
+ * Controls the sentry gun entity.
+ * 
+ * Developed by Superawesomemegasquad
+ */
+
+
 var SentryGunEntity = me.ObjectEntity.extend({
  
     /* -----

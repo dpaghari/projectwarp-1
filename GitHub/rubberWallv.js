@@ -1,3 +1,13 @@
+/*
+ * Project Warp
+ * 
+ * rubberWallv.js
+ * Controls the vertical rubber wall entity.
+ * 
+ * Developed by Superawesomemegasquad
+ */
+
+
 var rubberWallvEntity = me.ObjectEntity.extend({
     // extending the init function is not mandatory
     // unless you need to add some extra initialization

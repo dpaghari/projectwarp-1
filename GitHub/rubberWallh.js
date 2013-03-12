@@ -1,21 +1,21 @@
 /*
  * Project Warp
  * 
- * glassWallh.js
- * Controls the horizontal glass wall entity.
+ * rubberWallh.js
+ * Controls the horizontal rubber wall entity.
  * 
  * Developed by Superawesomemegasquad
  */
 
 
-var glassWallhEntity = me.ObjectEntity.extend({
+var rubberWallhEntity = me.ObjectEntity.extend({
     // extending the init function is not mandatory
     // unless you need to add some extra initialization
     init: function(x, y, settings) {
         // call the parent constructor
         this.parent(x, y, settings);
         this.collidable = true;
-        this.type = "glassWallh";
+        this.type = "rubberWallh";
         this.gravity = 0;
     },
     onCollision: function(res, obj) {

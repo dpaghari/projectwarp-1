@@ -1,102 +1,33 @@
-/*!
-*
-*   melonJS
-*   http://www.melonjs.org
-*
-*   Step by step game creation tutorial
-*
-**/
+/*
+*   Project Warp 
+*   main.js
+*   Main file, used to load in resources, game states, entities, and intitialize screens. 
+* 
+*   Developed by Superawesomemegasquad
+*/
 
-// game resources
-
+/*
+ * GAME RESOURCES
+ */
 
 var g_resources = [{
-	name : "gametileset",
-	type : "image",
-	src : "data/tileset/gametileset.png"
-}, {
-	//Levels go here
-	name : "level1",
-	type : "tmx",
-	src : "data/tileset/level1.tmx"
-},{
-	name: "level2",
-	type: "tmx",
-	src: "data/tileset/level2.tmx"
-},{
-	name: "level3",
-	type: "tmx",
-	src: "data/tileset/level3.tmx"
-},{
-	name : "level4",
-	type: "tmx",
-	src: "data/tileset/level4.tmx"
-},{
-	name : "loading_screen",
-	type : "image",
-	src : "data/loading_screen.jpg"
-},{
-	name: "metatiles32x32",
-	type: "image",
-	src: "data/tileset/metatiles32x32.png"
-},{
-	name : "player_sheet",
-	type : "image",
-	src : "data/Art/player_sheetnew.png"
-}, {
-	name : "bullet",
-	type : "image",
-	src : "data/Art/bullet_sheet.png"
-}, {
-	name : "gun",
-	type : "image",
-	src : "data/Art/bullet.png"
-}, {
-	name : "title_screen",
-	type : "image",
-	src : "data/GUI/title_screen.png"
-}, {
-	name : "32x32_font",
-	type : "image",
-	src : "data/bitmap_fonts/32x32_font.png"
-}, {
-	name: "stomp",
-	type: "audio",
-	src: "data/audio/"
-},{
-	name: "mysterious caves",
-	type: "audio",
-	src: "data/audio/"
-},{
-	name: "cling",
-    type: "audio",
-    src: "data/audio/",
-    channel: 2
-},{
-	name: "note",
-	type: "image",
-	src: "data/Art/note.png"
-},{
-	name: "clear",
-	type: "image",
-	src: "data/Art/clear.png"
-},{
-	name: "clearh",
-	type: "image",
-	src: "data/Art/clearh.png"
-},{
-	name: "clearv",
-	type: "image",
-	src: "data/Art/clearv.png"
-},{
-	name: "rubberv",
-	type: "image",
-	src: "data/Art/rubberv.png"
-},{
-	name: "sentrygun",
-	type: "image",
-	src: "data/Art/turret_test.png"
-}];
+	
+	// TILESETS
+	name : "gametileset", type : "image", src : "data/tileset/gametileset.png" },{ name: "metatiles32x32", type: "image", src: "data/tileset/metatiles32x32.png"}, {
+	
+	// LEVELS
+	name : "level1", type : "tmx", src : "data/tileset/level1.tmx"},{	name: "level2", type: "tmx", src: "data/tileset/level2.tmx"},{name: "level3",type: "tmx",src: "data/tileset/level3.tmx"},{
+	name : "level4",type: "tmx",src: "data/tileset/level4.tmx"},{
+	
+    // IMAGES
+	name : "loading_screen",type : "image",src : "data/loading_screen.jpg"},{name : "player_sheet",type : "image",src : "data/Art/player_sheetnew.png"}, {name : "bullet",type : "image",src : "data/Art/bullet_sheet.png"}, {
+	name : "gun",type : "image",src : "data/Art/bullet.png"}, {name : "title_screen",type : "image",src : "data/GUI/title_screen.png"}, {name : "32x32_font",type : "image",src : "data/bitmap_fonts/32x32_font.png"},{
+	name: "note",type: "image",src: "data/Art/note.png"},{name: "clear",type: "image",src: "data/Art/clear.png"},{name: "clearh",type: "image",src: "data/Art/clearh.png"},{
+	name: "clearv",type: "image",src: "data/Art/clearv.png"},{name: "rubberv",type: "image",src: "data/Art/rubberv.png"},{name: "sentrygun",type: "image",src: "data/Art/turret_test.png"}, {
+	
+	// AUDIO
+	name: "stomp",type: "audio",src: "data/audio/"},{name: "mysterious caves",type: "audio",src: "data/audio/"},{name: "cling",type: "audio",src: "data/audio/",channel: 2}];
+	
 var jsApp = {
 	/* ---
 
@@ -134,6 +65,8 @@ var jsApp = {
 	 ---										*/
 	loaded : function() {
 
+		// SCREENS
+		
 		// set the title screen object
 		me.state.set(me.state.MENU, new TitleScreen());
 
@@ -149,7 +82,8 @@ var jsApp = {
 		// set a global fading transition for the screen
 		me.state.transition("fade", "#FFFFFF", 250);
 
-		// add our player entity in the entity pool
+		
+		// ENTITIES
 		me.entityPool.add("mainPlayer", PlayerEntity);
 		me.entityPool.add("NoteEntity", NoteEntity, true);
 		me.entityPool.add("glassWallh", glassWallhEntity, true);
@@ -160,7 +94,7 @@ var jsApp = {
 		me.entityPool.add("LaserEntity", LaserEntity, true);
 		
 		
-		// enable the keyboard
+		// CONTROLS
 		me.input.bindKey(me.input.KEY.A, "left");
 		me.input.bindKey(me.input.KEY.D, "right");
 		me.input.bindKey(me.input.KEY.W, "jump", true);
@@ -169,7 +103,7 @@ var jsApp = {
 		me.input.bindKey(me.input.KEY.ESCAPE, "escape", true);
 		me.input.bindMouse(me.input.mouse.LEFT, me.input.KEY.U);
 		
-
+		
 		// start the game
 		me.state.change(me.state.MENU);
 	}

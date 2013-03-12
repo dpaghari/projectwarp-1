@@ -1,6 +1,14 @@
-/*------------------- 
-a player entity
--------------------------------- */
+/*
+ * Project Warp
+ * 
+ * bullet.js
+ * Controls the bullet entity. 
+ * 
+ * Developed by Superawesomemegasquad
+ */
+
+
+
 var BulletEntity = me.ObjectEntity.extend({
  
     /* -----

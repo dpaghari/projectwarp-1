@@ -1,6 +1,13 @@
-/*------------------- 
-a player entity
--------------------------------- */
+/*
+ * Project Warp
+ * 
+ * player.js
+ * Controls the player entity.
+ * 
+ * Developed by Superawesomemegasquad
+ */
+
+
 var PlayerEntity = me.ObjectEntity.extend({
  
     /* -----
