@@ -17,7 +17,7 @@ var g_resources = [{
 	
 	// LEVELS
 	name : "level1", type : "tmx", src : "data/tileset/level1.tmx"},{	name: "level2", type: "tmx", src: "data/tileset/level2.tmx"},{name: "level3",type: "tmx",src: "data/tileset/level3.tmx"},{
-	name : "level4",type: "tmx",src: "data/tileset/level4.tmx"},{
+	name : "level4",type: "tmx",src: "data/tileset/level4.tmx"},{name: "level5", type: "tmx", src: "data/tileset/level5.tmx"},{
 	
     // IMAGES
 	name : "loading_screen",type : "image",src : "data/loading_screen.jpg"},{name : "player_sheet",type : "image",src : "data/Art/player_sheetnew.png"}, {name : "bullet",type : "image",src : "data/Art/bullet_sheet.png"}, {
@@ -98,10 +98,11 @@ var jsApp = {
 		me.input.bindKey(me.input.KEY.A, "left");
 		me.input.bindKey(me.input.KEY.D, "right");
 		me.input.bindKey(me.input.KEY.W, "jump", true);
-		me.input.bindKey(me.input.KEY.SPACE, "warp", true);
 		me.input.bindKey(me.input.KEY.U, "shoot", true);
+		me.input.bindKey(me.input.KEY.SPACE, "warp", true);
 		me.input.bindKey(me.input.KEY.ESCAPE, "escape", true);
 		me.input.bindMouse(me.input.mouse.LEFT, me.input.KEY.U);
+	    //me.input.bindMouse(me.input.mouse.LEFT, me.input.KEY.I);
 		
 		
 		// start the game
@@ -122,9 +123,10 @@ var PlayScreen = me.ScreenObject.extend({
 
 	onResetEvent : function() {
 		// loads previous level
-		me.levelDirector.loadLevel("level1");
+		me.levelDirector.loadLevel("level4");
 		me.sys.gravity = 0.98;
 		me.sys.fps = 60;
+		me.timer.getTime();
 		
 		
 		//Find a cleaner way to make the song repeat...

@@ -42,11 +42,8 @@ var BulletEntity = me.ObjectEntity.extend({
     	var elapsedTime = me.timer.getTime() - this.timeAlive;	
     	var collision = this.collisionMap.checkCollision(this.collisionBox, this.vel);
 		var res = me.game.collide(this);
-		
-    
-    
-    
-    
+
+
         if (res && (res.obj.type === "glassWallv")){											// if the bullet hits a vertical glass wall
        	      if (res.x != 0)
               {

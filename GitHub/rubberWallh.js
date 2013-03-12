@@ -16,7 +16,7 @@ var rubberWallhEntity = me.ObjectEntity.extend({
         this.parent(x, y, settings);
         this.collidable = true;
         this.type = "rubberWallh";
-        this.gravity = 0;
+        this.gravity = 2;
     },
     onCollision: function(res, obj) {
  

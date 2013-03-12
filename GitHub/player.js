@@ -107,6 +107,17 @@ var PlayerEntity = me.ObjectEntity.extend({
         	me.game.add(bullet, this.z);
       	  	me.game.sort();
     	  	bulletAlive = true;
+    	  	
+    	  	/*
+    	  	if(bulletAlive == true){
+    	  		me.input.bindMouse(me.input.mouse.LEFT, me.input.KEY.I);
+    	  		me.input.bindKey(me.input.KEY.I, "warp", true);
+    	  	}else if(bulletAlive == false){
+    	  		me.input.bindMouse(me.input.mouse.LEFT, me.input.KEY.U);
+    	  		me.input.bindKey(me.input.KEY.U, "shoot", true);
+    	  	}
+    	  	*/
+    	  	
        		//alert("lol");
        		}
         }
@@ -124,8 +135,6 @@ var PlayerEntity = me.ObjectEntity.extend({
         	}
         }
           if (this.pos.y > 1000){
-    		
-    		//alert("Game Over!");
     		me.game.remove(this);
     		bulletAlive = false;
     		var currentLevel = me.levelDirector.getCurrentLevelId();
