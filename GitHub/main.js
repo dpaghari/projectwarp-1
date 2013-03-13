@@ -7,14 +7,12 @@
 *
 **/
 
-// game resources
+// GAME RESOURCES
 
 
-var g_resources = [{
-	name : "gametileset",
-	type : "image",
-	src : "data/tileset/gametileset.png"
-}, {
+var g_resources = 
+	// LEVELS
+	[{name : "gametileset",type : "image",src : "data/tileset/gametileset.png"}, {
 	//Levels go here
 	name : "level1",
 	type : "tmx",
@@ -32,6 +30,10 @@ var g_resources = [{
 	type: "tmx",
 	src: "data/tileset/level4.tmx"
 },{
+	name: "level5",
+	type: "tmx",
+	src: "data/tileset/level5.tmx"
+},{ 
 	name : "loading_screen",
 	type : "image",
 	src : "data/loading_screen.jpg"
