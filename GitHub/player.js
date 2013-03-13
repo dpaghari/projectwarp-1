@@ -1,13 +1,6 @@
-/*
- * Project Warp
- * 
- * player.js
- * Controls the player entity.
- * 
- * Developed by Superawesomemegasquad
- */
-
-
+/*------------------- 
+a player entity
+-------------------------------- */
 var PlayerEntity = me.ObjectEntity.extend({
  
     /* -----
@@ -23,13 +16,14 @@ var PlayerEntity = me.ObjectEntity.extend({
         this.parent(x, y, settings);
         this.animationspeed = 1;
         
-        this.addAnimation("stand",[0]);
+        this.addAnimation("stand",[24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40]);
         this.addAnimation("run",[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22]);
+        armNum = 0;
+    	//me.game.remove(arm);
+       
         
-        
-        
-        
-        
+       //this.arm = new ArmEntity(this.pos.x, this.pos.y, {image: "arm", spritewidth: 20, spriteheight: 20});
+			
         
  		this.gravity = 0.98;
         // set the default horizontal & vertical speed (accel vector)
@@ -47,27 +41,54 @@ var PlayerEntity = me.ObjectEntity.extend({
  
     ------ */
     update: function() {
-		
-           if (me.input.isKeyPressed('left')&&(walkleft == true)) {
+    		console.log(armNum);
+    		if(armNum == 0){
+    	 	arm = new ArmEntity(this.pos.x, this.pos.y, {image: "arm", spritewidth: 20, spriteheight: 20});
+        	me.game.add(arm, this.z + 10); 
+       		me.game.sort();
+       		
+       		armNum = 1;
+       		}
+        	if (faceRight == true){
+			
+			arm.pos.x = this.pos.x - 1;
+			arm.pos.y = this.pos.y + 25;
+			}
+			else{
+				
+				arm.pos.x = this.pos.x + 19;
+				arm.pos.y = this.pos.y + 25;
+			}
+			if (me.input.isKeyPressed('left')&&(walkleft == true)) {
         
             // flip the sprite on horizontal axis
             this.flipX(true);
+            
+            //arm.flipX(true);
+            //arm.flipY(true);
+            arm.pos.x = this.pos.x + 10;
             // update the entity velocity
             this.vel.x -= this.accel.x * me.timer.tick;
             //sign = -1;
             //this.vel.x += sign * speed * me.timer.tick;
             walkright = true;
+            faceRight = false;
+            faceLeft = true;
 
    
            } else if (me.input.isKeyPressed('right')&&(walkright == true)) {
             // unflip the sprite
             
             this.flipX(false);
+            arm.flipX(false);
+            arm.pos.x = this.pos.x + 10;
             // update the entity velocity
             this.vel.x += this.accel.x* me.timer.tick;
             //sign = 1;
             //this.vel.x += sign * speed * me.timer.tick;
             walkleft = true;
+            faceLeft = false;
+            faceRight = true;
 
         } else {
             this.vel.x = 0;
@@ -106,18 +127,8 @@ var PlayerEntity = me.ObjectEntity.extend({
         	bullet.vel = direction;
         	me.game.add(bullet, this.z);
       	  	me.game.sort();
+      	  	 
     	  	bulletAlive = true;
-    	  	
-    	  	/*
-    	  	if(bulletAlive == true){
-    	  		me.input.bindMouse(me.input.mouse.LEFT, me.input.KEY.I);
-    	  		me.input.bindKey(me.input.KEY.I, "warp", true);
-    	  	}else if(bulletAlive == false){
-    	  		me.input.bindMouse(me.input.mouse.LEFT, me.input.KEY.U);
-    	  		me.input.bindKey(me.input.KEY.U, "shoot", true);
-    	  	}
-    	  	*/
-    	  	
        		//alert("lol");
        		}
         }
@@ -135,6 +146,8 @@ var PlayerEntity = me.ObjectEntity.extend({
         	}
         }
           if (this.pos.y > 1000){
+    		
+    		//alert("Game Over!");
     		me.game.remove(this);
     		bulletAlive = false;
     		var currentLevel = me.levelDirector.getCurrentLevelId();
@@ -152,7 +165,9 @@ var PlayerEntity = me.ObjectEntity.extend({
     		var currentLevel = me.levelDirector.getCurrentLevelId();
     			me.game.remove(this);
     			bulletAlive = false;
+    			
     			me.levelDirector.loadLevel(currentLevel);
+    			
     		
     	}
  
@@ -186,18 +201,23 @@ var PlayerEntity = me.ObjectEntity.extend({
         
     }   	  	 
 });
+
+
 //PlayerEntity.prototype.pos.x;
 //PlayerEntity.prototype.pos.y;
 //PlayerEntity.prototype.xvel = 0;
 //PlayerEntity.prototype.vel.x = 0;
 //PlayerEntity.prototype.vel.y = 0;
-
+var arm;
+var armNum = 0;
 var walkleft = true;
 var walkright = true;
 var bulletAlive = false;
 var hitright = false;
 var hileft = false;
 var bullet;
+var faceLeft;
+var faceRight;
         	var mouseX ;		 //mouse x position + offset of viewport
         	var mouseY;		//mouse y position + offset of viewport
         	var magnitude;

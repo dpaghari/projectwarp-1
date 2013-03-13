@@ -1,7 +1,7 @@
 /*------------------- 
 a player entity
 -------------------------------- */
-var SentryGunEntity = me.ObjectEntity.extend({
+var SentryGun2Entity = me.ObjectEntity.extend({
  
     /* -----
  
@@ -25,8 +25,8 @@ var SentryGunEntity = me.ObjectEntity.extend({
     	var elapsedTime = me.timer.getTime() - this.previousTime;
        	if(elapsedTime >= delay){
        		//sbullet = me.entityPool.newInstanceOf("sentrybullet", this.pos.x + 50, this.pos.y + 10, 0);
-        	sbullet = new SentryBulletEntity(this.pos.x + 50, this.pos.y + 15, { image: 'gun', spritewidth: 15 , spriteheight: 15});
-        	sbullet.vel.x = 8;
+        	sbullet = new SentryBulletEntity(this.pos.x - 50, this.pos.y + 15, { image: 'gun', spritewidth: 15 , spriteheight: 15});
+        	sbullet.vel.x = -8;
         	me.game.add(sbullet, this.z);
         	me.game.sort();
         	this.previousTime = me.timer.getTime();

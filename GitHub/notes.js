@@ -1,12 +1,3 @@
-/*
- * Project Warp
- * 
- * notes.js
- * Controls the note entity.
- * 
- * Developed by Superawesomemegasquad
- */
-
 /*----------------
  a Lab Note entity
 ------------------------ */

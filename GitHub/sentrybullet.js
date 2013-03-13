@@ -1,16 +1,6 @@
-/*
- * Project Warp
- * 
- * sentrybullet.js
- * Controls the sentry's bullet entity. 
- * 
- * Developed by Superawesomemegasquad
- */
-
-
-
-
-
+/*------------------- 
+a player entity
+-------------------------------- */
 var SentryBulletEntity = me.ObjectEntity.extend({
  
     /* -----
@@ -45,9 +35,16 @@ var SentryBulletEntity = me.ObjectEntity.extend({
 		//var res = me.game.collide(this);
   			
     	// Bullet Lifetime				
-    						
+    		
+    	 if (collision.yprop.isSolid||collision.xprop.isSolid)
+	      {
+	      	me.audio.play("stomp"); 
+		    me.game.remove(this);
+			
+		  
+	      }							
     	// If 1 second has passed					
-    	if(elapsedTime > 1000){		
+    	if(elapsedTime > 1500){		
     		sbulletAlive = false;									
     		me.game.remove(this);
     		

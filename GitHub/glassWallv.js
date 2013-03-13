@@ -1,13 +1,3 @@
-/*
- * Project Warp
- * 
- * glassWallv.js
- * Controls the vertical glass wall entity.
- * 
- * Developed by Superawesomemegasquad
- */
-
-
 var glassWallvEntity = me.ObjectEntity.extend({
     // extending the init function is not mandatory
     // unless you need to add some extra initialization

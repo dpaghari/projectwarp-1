@@ -1,7 +1,7 @@
 /*------------------- 
 a player entity
 -------------------------------- */
-var LaserEntity = me.ObjectEntity.extend({
+var Laser2Entity = me.ObjectEntity.extend({
  
     /* -----
  
@@ -10,17 +10,16 @@ var LaserEntity = me.ObjectEntity.extend({
     ------ */
     init: function(x, y, settings) {
         // call the constructor
-       	this.gravity = 0;
+        this.gravity = 0;
         settings.spritewidth = 32;
         settings.spriteheight = 32;
         this.parent(x, y, settings);
         this.animationspeed = 1;
-       	this.addAnimation("flickaz",[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]);
+        this.addAnimation("flicker",[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]);
         
-       
+        
         this.collidable = true;
-        this.setCurrentAnimation("flickaz");
-
+		this.setCurrentAnimation("flicker");
         this.type = me.game.ENEMY_OBJECT;	
         
         //this.setVelocity(10, 20);
@@ -46,11 +45,13 @@ var LaserEntity = me.ObjectEntity.extend({
     ------ */
     update: function() {
     	var collision = this.collisionMap.checkCollision(this.collisionBox, this.vel);
-		if (this.vel.x == 0 || this.vel.y == 0){
-    		this.setCurrentAnimation("flickaz");
+    	if (this.vel.x == 0 || this.vel.y == 0){
+    		this.setCurrentAnimation("flicker");
     		this.parent();
     		return true;
     	}
+		
+    	
  	}
  	
  	// this function is called by the engine, when

@@ -1,12 +1,8 @@
-/*
- * Project Warp
- * 
- * screens.js
- * Stores each of the various screens of the game, and loads their appropriate
- * resources.
- * 
- * Developed by Superawesomemegasquad
- */
+/* -----
+
+	gameScreens
+		
+	------			*/
 
 /*---------------------------------------------------------------------
 
