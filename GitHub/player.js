@@ -15,12 +15,19 @@ var PlayerEntity = me.ObjectEntity.extend({
         // call the constructor
         this.parent(x, y, settings);
         this.animationspeed = 1;
-        
+        this.addAnimation("die", [56,57,58,59,60,61,62,63,64,65,66,67]);
+        this.addAnimation("jump",[42,43,44,45,46,47,48,49,50,51,52,53,54,55]);
         this.addAnimation("stand",[24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40]);
         this.addAnimation("run",[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22]);
+        this.isDeadz = false;
         armNum = 0;
     	//me.game.remove(arm);
-       
+        me.input.bindKey(me.input.KEY.A, "left");
+		me.input.bindKey(me.input.KEY.D, "right");
+		me.input.bindKey(me.input.KEY.W, "jump", true);
+		me.input.bindKey(me.input.KEY.S, "down", true);
+		me.input.bindKey(me.input.KEY.SPACE, "warp", true);
+		
         
        //this.arm = new ArmEntity(this.pos.x, this.pos.y, {image: "arm", spritewidth: 20, spriteheight: 20});
 			
@@ -41,7 +48,7 @@ var PlayerEntity = me.ObjectEntity.extend({
  
     ------ */
     update: function() {
-    		console.log(armNum);
+    		//console.log(armNum);
     		if(armNum == 0){
     	 	arm = new ArmEntity(this.pos.x, this.pos.y, {image: "arm", spritewidth: 20, spriteheight: 20});
         	me.game.add(arm, this.z + 10); 
@@ -159,18 +166,57 @@ var PlayerEntity = me.ObjectEntity.extend({
         
       
     	var res = me.game.collide(this);
-   
+   		
     	if(res && (res.obj.type == me.game.ENEMY_OBJECT)){
-    		
-    		var currentLevel = me.levelDirector.getCurrentLevelId();
-    			me.game.remove(this);
+    			this.isDeadz = true;
+    			/*me.input.unbindKey(me.input.KEY.A);
+    			me.input.unbindKey(me.input.KEY.W);
+    			me.input.unbindKey(me.input.KEY.S);
+    			me.input.unbindKey(me.input.KEY.D);
+    			me.input.unbindKey(me.input.KEY.SPACE);
+    			this.vel.y = 0;
+    			this.gravity = 0;
+    			
+    			
+    		this.setCurrentAnimation("die", function(){
+    			
+    			
+    			
+    			var currentLevel = me.levelDirector.getCurrentLevelId();
     			bulletAlive = false;
-    			
     			me.levelDirector.loadLevel(currentLevel);
-    			
+    			me.game.remove(this)});
+    		this.parent();
+    		
+    		return true;
+    	
+    			*/
     		
     	}
- 
+ 		
+ 		if(this.isDeadz){
+ 			
+ 				me.input.unbindKey(me.input.KEY.A);
+    			me.input.unbindKey(me.input.KEY.W);
+    			me.input.unbindKey(me.input.KEY.S);
+    			me.input.unbindKey(me.input.KEY.D);
+    			me.input.unbindKey(me.input.KEY.SPACE);
+    			this.vel.y = 0;
+    			this.gravity = 0;
+    			
+    			
+    		this.setCurrentAnimation("die", function(){
+    			
+    			
+    			
+    			var currentLevel = me.levelDirector.getCurrentLevelId();
+    			bulletAlive = false;
+    			me.levelDirector.loadLevel(currentLevel);
+    			me.game.remove(this)});
+    			this.parent();
+    		
+    			return true;
+ 		}
         // update animation if necessary
         if (this.vel.x!=0 && this.vel.y==0) {
             // update object animation
@@ -179,12 +225,12 @@ var PlayerEntity = me.ObjectEntity.extend({
             return true;
         }
         else if (this.vel.y != 0 && this.vel.x !=0){
-        	this.setCurrentAnimation("stand");
+        	this.setCurrentAnimation("jump");
         	this.parent();
         	return true;
         }
         else if(this.vel.y != 0 && this.vel.x == 0){
-        	this.setCurrentAnimation("stand");
+        	this.setCurrentAnimation("jump");
         	this.parent();
         	return true;
         }
@@ -202,7 +248,7 @@ var PlayerEntity = me.ObjectEntity.extend({
     }   	  	 
 });
 
-
+PlayerEntity.prototype.isDeadz;
 //PlayerEntity.prototype.pos.x;
 //PlayerEntity.prototype.pos.y;
 //PlayerEntity.prototype.xvel = 0;

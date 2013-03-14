@@ -9,10 +9,11 @@
   <image source="../GUI/title_screen.png"/>
  </imagelayer>
  <objectgroup name="Entities" width="24" height="18">
-  <object name="mainPlayer" x="224" y="256" width="64" height="64">
+  <object name="Play_Game" x="224" y="352" width="288" height="64">
    <properties>
-    <property name="image" value="sprite_sheet"/>
-    <property name="spritewidth" value="32"/>
+    <property name="image" value="play_game"/>
+    <property name="spriteheight" value="35"/>
+    <property name="spritewidth" value="192"/>
    </properties>
   </object>
  </objectgroup>

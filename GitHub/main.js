@@ -57,10 +57,6 @@ var g_resources =
 	type : "image",
 	src : "data/Art/bullet.png"
 }, {
-	name : "title_screen",
-	type : "image",
-	src : "data/GUI/title_screen.png"
-}, {
 	name : "32x32_font",
 	type : "image",
 	src : "data/bitmap_fonts/32x32_font.png"
@@ -129,6 +125,26 @@ var g_resources =
 	name: "arm",
 	type: "image",
 	src: "data/Art/Arm.png"
+},{
+	name: "title_screen_press_enter",
+	type: "image",
+	src: "data/GUI/title_screen_press_enter.png"
+},{
+	name: "title_screen_play_game",
+	type: "image",
+	src: "data/GUI/title_screen_play_game.png"
+},{
+	name: "title_screen_level_select",
+	type: "image",
+	src: "data/GUI/title_screen_level_select.png"
+},{
+	name: "title_screen_options",
+	type: "image",
+	src: "data/GUI/title_screen_options.png"
+},{
+	name: "level_select_screen",
+	type: "image",
+	src: "data/GUI/level_select_screen.png"
 }];
 var jsApp = {
 	/* ---
@@ -174,13 +190,16 @@ var jsApp = {
 		me.state.set(me.state.PLAY, new PlayScreen());
 
 		// set the pause screen object
-		me.state.set(me.state.PAUSE, new PauseScreen());
+		//me.state.set(me.state.PAUSE, new PauseScreen());
 		
 		// set the load screen object
-		me.state.set(me.state.LOADING, new CustomLoadingScreen());
+		//me.state.set(me.state.LOADING, new CustomLoadingScreen());
+		
+		// set the cursor screen
+		me.state.set(me.state.SELECT, new CursorScreen());
 
 		// set a global fading transition for the screen
-		me.state.transition("fade", "#FFFFFF", 250);
+		//me.state.transition("fade", "#FFFFFF", 250);
 
 		// add our player entity in the entity pool
 		me.entityPool.add("mainPlayer", PlayerEntity);							// Winston
@@ -197,7 +216,7 @@ var jsApp = {
 		me.entityPool.add("Laser4Entity", Laser4Entity, true);					// Vertical Laser Beam bot piece
 		me.entityPool.add("Laser5Entity", Laser5Entity, true);					// Horizontal Laser Beam left piece
 		me.entityPool.add("Laser6Entity", Laser6Entity, true);					// Horizontal Laser Beam right piece
-		//me.entityPool.add("ArmEntity", ArmEntity);
+		me.entityPool.add("Play_Game", PlayGameEntity);
 		
 		
 		
@@ -205,14 +224,17 @@ var jsApp = {
 		me.input.bindKey(me.input.KEY.A, "left");
 		me.input.bindKey(me.input.KEY.D, "right");
 		me.input.bindKey(me.input.KEY.W, "jump", true);
+		me.input.bindKey(me.input.KEY.S, "down", true);
 		me.input.bindKey(me.input.KEY.SPACE, "warp", true);
 		me.input.bindKey(me.input.KEY.U, "shoot", true);
 		me.input.bindKey(me.input.KEY.ESCAPE, "escape", true);
+		me.input.bindKey(me.input.KEY.ENTER, "enter", true);
 		me.input.bindMouse(me.input.mouse.LEFT, me.input.KEY.U);
 		
 
 		// start the game
 		me.state.change(me.state.MENU);
+		console.log("went to title screen (screens.js)");
 	}
 };
 
@@ -232,7 +254,6 @@ var PlayScreen = me.ScreenObject.extend({
 		me.levelDirector.loadLevel("level1");
 		me.sys.gravity = 0.98;
 		me.sys.fps = 60;
-		
 		
 		
 		//Find a cleaner way to make the song repeat...
