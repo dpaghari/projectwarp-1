@@ -36,7 +36,7 @@
  <objectgroup name="Entities" width="15" height="80">
   <object name="mainPlayer" x="0" y="2464" width="64" height="64">
    <properties>
-    <property name="image" value="sprite_sheet"/>
+    <property name="image" value="player_sheet"/>
     <property name="spritewidth" value="32"/>
    </properties>
   </object>

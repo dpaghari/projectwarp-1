@@ -26,6 +26,7 @@ var CursorScreen = me.ScreenObject.extend({
 			me.input.bindKey(me.input.KEY.NUM3, "three", true);
 			me.input.bindKey(me.input.KEY.NUM4, "four", true);
 			me.input.bindKey(me.input.KEY.NUM5, "five", true);
+			me.input.bindKey(me.input.KEY.NUM6, "six", true);
 			me.input.bindKey(me.input.KEY.UP, "upz", true);
 			me.input.bindKey(me.input.KEY.DOWN, "downz", true);
 			//if(me.input.isKeyPressed('enter')){
@@ -106,6 +107,9 @@ var CursorScreen = me.ScreenObject.extend({
 				}
 				else if(me.input.isKeyPressed('five')){
 					me.levelDirector.loadLevel("level5");
+				}
+				else if(me.input.isKeyPressed('six')){
+					me.levelDirector.loadLevel("level6");
 				}
 				else if(me.input.isKeyPressed('escape')){
 					this.title = me.loader.getImage("title_screen_play_game");
