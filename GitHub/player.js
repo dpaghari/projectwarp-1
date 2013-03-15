@@ -213,7 +213,9 @@ var PlayerEntity = me.ObjectEntity.extend({
     			bulletAlive = false;
     			me.levelDirector.loadLevel(currentLevel);
     			me.game.remove(this)});
+
     			this.parent();
+    			
     		
     			return true;
  		}

@@ -241,6 +241,8 @@ var jsApp = {
 // jsApp
 
 /* the in game stuff*/
+
+
 var PlayScreen = me.ScreenObject.extend({
 
 	/* 
@@ -251,6 +253,7 @@ var PlayScreen = me.ScreenObject.extend({
 
 	onResetEvent : function() {
 		// loads previous level
+	//	this.parent(true);
 		me.levelDirector.loadLevel("level1");
 		me.sys.gravity = 0.98;
 		me.sys.fps = 60;
@@ -262,6 +265,8 @@ var PlayScreen = me.ScreenObject.extend({
 		if (me.input.isKeyPressed('escape')){
 			me.state.change(me.state.PAUSE);
 		}
+        me.game.addHUD(0, 0, 800, 600);
+        me.game.add(new Manager(), 0);
 		me.game.sort();
 	},
 
@@ -272,7 +277,7 @@ var PlayScreen = me.ScreenObject.extend({
 
 	 --- */
 	onDestroyEvent : function() {
-		
+		me.game.disableHUD();
 		//Go to the pause screen when ESCAPE is pressed
 		//me.input.bindKey(me.input.KEY.ESCAPE);
 		//me.state.change(me.state.PAUSE);
