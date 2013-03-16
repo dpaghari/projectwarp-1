@@ -21,6 +21,8 @@ var BulletEntity = me.ObjectEntity.extend({
         this.collidable = true;
         // returns current game time
         this.speed = 10;
+        this.rubber = false;		//rubberwallv
+        this.checkcol = 0;			//rubberwallv
         this.timeAlive = me.timer.getTime();
        
     },
@@ -77,13 +79,15 @@ var BulletEntity = me.ObjectEntity.extend({
 	   	
 	   } 
 	   if (res && (res.obj.type == "rubberWallv")){											// if the bullet hits a vertical rubber wall
-       	      if (res.x != 0)
+       	      this.rubber = true
+       	      this.checkcol++;
+       	      /*if (res.x != 0)
               {
                            // x axis
                        if (res.x<0){																// kill the bullet's velocity
                            direction = new me.Vector2d(0, 0);
                            this.vel=direction;   
-                           this.gravity = this.speed;  
+                           this.gravity = 5;  
                            
                        }
                     
@@ -91,15 +95,23 @@ var BulletEntity = me.ObjectEntity.extend({
                        else{
                            direction = new me.Vector2d(0, 0);
                            this.vel=direction;   
-                           this.gravity = this.speed;
+                           this.gravity = 5;
                                   	
                        }
                       
-              }
+              }*/
          
            
        } 
 	 
+	 if(this.rubber = true && this.checkcol == 1){
+	 	this.vel.x = 0;
+	 	this.vel.y = 0;
+	 	this.gravity = .5;
+	 	this.rubber = false;
+	 	if(this.accel.y > 1)
+	 		this.accel.y = 1;
+	 }
 	    
 	    
 	    
@@ -136,3 +148,5 @@ var BulletEntity = me.ObjectEntity.extend({
 });
 
 BulletEntity.prototype.timeAlive;
+BulletEntity.prototype.checkcol;
+BulletEntity.prototype.rubber;

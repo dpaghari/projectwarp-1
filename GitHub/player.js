@@ -10,10 +10,12 @@ var PlayerEntity = me.ObjectEntity.extend({
     ------ */
  
     init: function(x, y, settings) {
+    
     	settings.spritewidth = 32;
     	settings.spriteheight = 44;
         // call the constructor
         this.parent(x, y, settings);
+        bulletAlive = false;
         this.animationspeed = 1;
         this.addAnimation("die", [56,57,58,59,60,61,62,63,64,65,66,67]);
         this.addAnimation("jump",[42,43,44,45,46,47,48,49,50,51,52,53,54,55]);
@@ -48,7 +50,8 @@ var PlayerEntity = me.ObjectEntity.extend({
  
     ------ */
     update: function() {
-    		//console.log(armNum);
+    	
+    		console.log(coordy);
     		if(armNum == 0){
     	 	arm = new ArmEntity(this.pos.x, this.pos.y, {image: "arm", spritewidth: 20, spriteheight: 20});
         	me.game.add(arm, this.z + 10); 
@@ -152,9 +155,9 @@ var PlayerEntity = me.ObjectEntity.extend({
         	me.game.remove(bullet, true);
         	}
         }
-          if (this.pos.y > 1000){
+          if (this.pos.y > coordy){
     		
-    		//alert("Game Over!");
+    		alert("Game Over!");
     		me.game.remove(this);
     		bulletAlive = false;
     		var currentLevel = me.levelDirector.getCurrentLevelId();
@@ -213,9 +216,7 @@ var PlayerEntity = me.ObjectEntity.extend({
     			bulletAlive = false;
     			me.levelDirector.loadLevel(currentLevel);
     			me.game.remove(this)});
-
     			this.parent();
-    			
     		
     			return true;
  		}

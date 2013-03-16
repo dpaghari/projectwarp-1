@@ -37,6 +37,10 @@ var g_resources =
 	type: "tmx",
 	src: "data/tileset/level6.tmx"
 },{
+	name: "level7",
+	type: "tmx",
+	src: "data/tileset/level7.tmx"
+},{
 	name : "loading_screen",
 	type : "image",
 	src : "data/loading_screen.jpg"
@@ -217,6 +221,7 @@ var jsApp = {
 		me.entityPool.add("Laser5Entity", Laser5Entity, true);					// Horizontal Laser Beam left piece
 		me.entityPool.add("Laser6Entity", Laser6Entity, true);					// Horizontal Laser Beam right piece
 		me.entityPool.add("Play_Game", PlayGameEntity);
+		me.entityPool.add("MarkerEntity", MarkerEntity, true);						// Death Threshold
 		
 		
 		
@@ -241,8 +246,6 @@ var jsApp = {
 // jsApp
 
 /* the in game stuff*/
-
-
 var PlayScreen = me.ScreenObject.extend({
 
 	/* 
@@ -253,7 +256,6 @@ var PlayScreen = me.ScreenObject.extend({
 
 	onResetEvent : function() {
 		// loads previous level
-	//	this.parent(true);
 		me.levelDirector.loadLevel("level1");
 		me.sys.gravity = 0.98;
 		me.sys.fps = 60;
@@ -265,8 +267,6 @@ var PlayScreen = me.ScreenObject.extend({
 		if (me.input.isKeyPressed('escape')){
 			me.state.change(me.state.PAUSE);
 		}
-        me.game.addHUD(0, 0, 800, 600);
-        me.game.add(new Manager(), 0);
 		me.game.sort();
 	},
 
@@ -277,7 +277,7 @@ var PlayScreen = me.ScreenObject.extend({
 
 	 --- */
 	onDestroyEvent : function() {
-		me.game.disableHUD();
+		
 		//Go to the pause screen when ESCAPE is pressed
 		//me.input.bindKey(me.input.KEY.ESCAPE);
 		//me.state.change(me.state.PAUSE);
