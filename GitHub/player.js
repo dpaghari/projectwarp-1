@@ -50,6 +50,21 @@ var PlayerEntity = me.ObjectEntity.extend({
  
     ------ */
     update: function() {
+	    	var res = me.game.collide(this);
+    	         if (res && (res.obj.type == "glassWallv"||res.obj.type == "glassWallh")){
+    		        if (res.x != 0){
+                 // x axis
+                    if (res.x<0){
+                    	 walkleft = false;
+			             walkright= true;
+                    }  
+                    else{
+                    	 walkleft = true;
+			             walkright= false;                    	
+                    }
+                      
+                 }
+        	}
     	
     		console.log(coordy);
     		if(armNum == 0){
