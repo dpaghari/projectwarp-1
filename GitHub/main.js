@@ -1,10 +1,16 @@
 /*!
-*
+*	Project Warp
+*   A game by Superawesomemegasquad
+* 	Daniel Pagharion
+*   Nathan Nichols-Roy
+*   John Bentley
+*   John Mai
+*   CMPS 20 & CMPE 131
+*   Winter 2013
+* 
+* 	Created using melonjs game engine
 *   melonJS
 *   http://www.melonjs.org
-*
-*   Step by step game creation tutorial
-*
 **/
 
 // GAME RESOURCES
@@ -189,6 +195,10 @@ var g_resources =
 	name: "foreground",
 	type: "image",
 	src: "data/tileset/foreground.png"
+},{
+	name: "pauseguy",
+	type: "image",
+	src:  "data/Art/pause.png"
 }];
 var jsApp = {
 	/* ---
@@ -268,6 +278,7 @@ var jsApp = {
 		
 		
 		
+		
 		// enable the keyboard
 		me.input.bindKey(me.input.KEY.A, "left");
 		me.input.bindKey(me.input.KEY.D, "right");
@@ -275,7 +286,6 @@ var jsApp = {
 		me.input.bindKey(me.input.KEY.S, "down", true);
 		me.input.bindKey(me.input.KEY.SPACE, "warp", true);
 		me.input.bindKey(me.input.KEY.U, "shoot", true);
-		me.input.bindKey(me.input.KEY.ESCAPE, "escape", true);
 		me.input.bindKey(me.input.KEY.ENTER, "enter", true);
 		me.input.bindMouse(me.input.mouse.LEFT, me.input.KEY.U);
 		

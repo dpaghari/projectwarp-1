@@ -291,5 +291,11 @@
     <property name="spritewidth" value="32"/>
    </properties>
   </object>
+  <object name="NoteEntity" x="4512" y="832" width="32" height="32">
+   <properties>
+    <property name="image" value="note"/>
+    <property name="spritewidth" value="32"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

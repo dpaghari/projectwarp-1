@@ -31,6 +31,7 @@ var PlayerEntity = me.ObjectEntity.extend({
 		me.input.bindKey(me.input.KEY.S, "down", true);
 		me.input.bindKey(me.input.KEY.SPACE, "warp", true);
 		me.input.bindKey(me.input.KEY.R, "restart", true);
+		me.input.bindKey(me.input.KEY.ESC, "pause", true);
 		
         
        //this.arm = new ArmEntity(this.pos.x, this.pos.y, {image: "arm", spritewidth: 20, spriteheight: 20});
@@ -41,6 +42,7 @@ var PlayerEntity = me.ObjectEntity.extend({
         this.setVelocity(4, 12);
 		//this.setCurrentAnimation("stand");
  		this.updateColRect(-1, 32, -1, 44);
+ 		
         // set the display to follow our position on both axis
         me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 		
@@ -83,7 +85,7 @@ var PlayerEntity = me.ObjectEntity.extend({
                  }
         	}
     	
-    		console.log(coordy);
+    		
     		if(armNum == 0){
     	 	arm = new ArmEntity(this.pos.x, this.pos.y, {image: "arm", spritewidth: 20, spriteheight: 20});
         	me.game.add(arm, this.z+1); 
@@ -174,16 +176,19 @@ var PlayerEntity = me.ObjectEntity.extend({
        		//alert("lol");
        		}
         }
-
+		if (me.input.isKeyPressed("pause")) {
+    			me.state.pause();   			
+    			var resume_loop = setInterval(function check_resume() {
+        		if (me.input.isKeyPressed("pause")) {
+            		clearInterval(resume_loop);
+            		me.state.resume();
+        		}
+    			}, 100);
+}
         if(me.input.isKeyPressed('restart')){
         		
         		var currentLevel = me.levelDirector.getCurrentLevelId();
-        		me.levelDirector.loadLevel(currentLevel);
-        		
-        	
-        	
-        		
-        	
+        		me.levelDirector.loadLevel(currentLevel);        	
         }
         if(me.input.isKeyPressed('warp')) {
         	if(bulletAlive == true){
@@ -271,7 +276,7 @@ var PlayerEntity = me.ObjectEntity.extend({
 });
 
 PlayerEntity.prototype.isDeadz;
-
+var pauseHudz;
 var arm;
 var armNum = 0;
 var walkleft = true;
