@@ -244,10 +244,7 @@ var jsApp = {
 		me.state.set(me.state.PLAY, new PlayScreen());
 
 		// set the pause screen object
-		//me.state.set(me.state.PAUSE, new PauseScreen());
-		
-		// set the load screen object
-		//me.state.set(me.state.LOADING, new CustomLoadingScreen());
+		me.state.set(me.state.PAUSE, new PauseScreen());
 		
 		// set the cursor screen
 		me.state.set(me.state.SELECT, new CursorScreen());
@@ -318,6 +315,7 @@ var PlayScreen = me.ScreenObject.extend({
 		//me.audio.playTrack("mysterious caves", 0);
 
 		if (me.input.isKeyPressed('escape')){
+			var currentLevel = me.levelDirector.getCurrentLevelId();
 			me.state.change(me.state.PAUSE);
 		}
 		me.game.sort();

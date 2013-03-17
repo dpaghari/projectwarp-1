@@ -54,60 +54,55 @@ var PlayerEntity = me.ObjectEntity.extend({
  
     ------ */
     update: function() {
-    	
-    	console.log(daCurLevel);
-    	
-	    	var res = me.game.collide(this);
-    	         if (res && (res.obj.type == "glassWallv"||res.obj.type == "glassWallh")){
-    		        if (res.x != 0){
-                 // x axis
-                    if (res.x<0){
-                    	 walkleft = false;
-			             walkright= true;
-                    }  
-                    else{
-                    	 walkleft = true;
-			             walkright= false;                    	
-                    }
+    	daCurLevel = me.levelDirector.getCurrentLevelId();
+    	console.log(daCurLevel);	
+	    var res = me.game.collide(this);
+    	if (res && (res.obj.type == "glassWallv"||res.obj.type == "glassWallh")){
+    		if (res.x != 0){
+            // x axis
+            	if (res.x<0){
+                	walkleft = false;
+			        walkright= true;
+                }  
+                else{
+                	walkleft = true;
+			        walkright= false;                    	
+                }
                       
-                 }
-        	}
+            }
+        }
         	
-        	 if (res && (res.obj.type == "rubberWallv")){
-    		        if (res.x != 0){
-                 // x axis
-                    if (res.x<0){
-                    	 walkleft = false;
-			             walkright= true;
-                    }  
-                    else{
-                    	 walkleft = true;
-			             walkright= false;                    	
-                    }
+        if (res && (res.obj.type == "rubberWallv")){
+    		 if (res.x != 0){
+             	// x axis
+                if (res.x<0){
+                   walkleft = false;
+			       walkright= true;
+                }  
+                else{
+                   walkleft = true;
+			       walkright= false;                    	
+                }
                       
-                 }
-        	}
-    	
+              }
+        }
     		
-    		if(armNum == 0){
+    	if(armNum == 0){
     	 	arm = new ArmEntity(this.pos.x, this.pos.y, {image: "arm", spritewidth: 20, spriteheight: 20});
         	me.game.add(arm, this.z+1); 
        		me.game.sort();
        		
        		armNum = 1;
-       		}
-        	if (faceRight == true){
-			
+       	}
+        if (faceRight == true){
 			arm.pos.x = this.pos.x - 1;
 			arm.pos.y = this.pos.y + 25;
-			}
-			else{
-				
-				arm.pos.x = this.pos.x + 19;
-				arm.pos.y = this.pos.y + 25;
-			}
-			if (me.input.isKeyPressed('left')&&(walkleft == true)) {
-        
+		}
+		else{	
+			arm.pos.x = this.pos.x + 19;
+			arm.pos.y = this.pos.y + 25;
+		}
+		if (me.input.isKeyPressed('left')&&(walkleft == true)) {
             // flip the sprite on horizontal axis
             this.flipX(true);
             
@@ -123,7 +118,7 @@ var PlayerEntity = me.ObjectEntity.extend({
             faceLeft = true;
 
    
-           } else if (me.input.isKeyPressed('right')&&(walkright == true)) {
+         } else if (me.input.isKeyPressed('right')&&(walkright == true)) {
             // unflip the sprite
             
             this.flipX(false);
@@ -161,30 +156,30 @@ var PlayerEntity = me.ObjectEntity.extend({
         	}
         	*/
         	if(bulletAlive == false){
-        	//normalize vectors to make speed constant
-        	mouseX = (me.input.mouse.pos.x+me.game.viewport.pos.x)-this.pos.x;		 //mouse x position + offset of viewport
-        	mouseY = (me.input.mouse.pos.y+me.game.viewport.pos.y)-this.pos.y;		//mouse y position + offset of viewport
-        	magnitude = (Math.sqrt(mouseX*mouseX + mouseY*mouseY));
-        	vectorX = mouseX/magnitude;				
-  		   	vectorY = mouseY/magnitude;
-        	speed = 10;
-       		direction = new me.Vector2d(vectorX*speed, vectorY*speed);
-       		//create bullet
-        	bullet = new BulletEntity(this.pos.x, this.pos.y, { image: 'bullet', spritewidth: 14 , spriteheight: 14});
-        	bullet.vel = direction;
-        	me.game.add(bullet, this.z);
-      	  	me.game.sort();
+        		//normalize vectors to make speed constant
+        		mouseX = (me.input.mouse.pos.x+me.game.viewport.pos.x)-this.pos.x;		 //mouse x position + offset of viewport
+        		mouseY = (me.input.mouse.pos.y+me.game.viewport.pos.y)-this.pos.y;		//mouse y position + offset of viewport
+        		magnitude = (Math.sqrt(mouseX*mouseX + mouseY*mouseY));
+        		vectorX = mouseX/magnitude;				
+  			   	vectorY = mouseY/magnitude;
+        		speed = 10;
+       			direction = new me.Vector2d(vectorX*speed, vectorY*speed);
+       			//create bullet
+       		 	bullet = new BulletEntity(this.pos.x, this.pos.y, { image: 'bullet', spritewidth: 14 , spriteheight: 14});
+        		bullet.vel = direction;
+        		me.game.add(bullet, this.z);
+      		  	me.game.sort();
       	  	 
-    	  	bulletAlive = true;
-       		//alert("lol");
+    	 	 	bulletAlive = true;
+       			//alert("lol");
        		}
         }
 		if (me.input.isKeyPressed("pause")) {
-    			me.state.pause();   			
+    			me.state.change(me.state.PAUSE);   			
     			var resume_loop = setInterval(function check_resume() {
         		if (me.input.isKeyPressed("pause")) {
             		clearInterval(resume_loop);
-            		me.state.resume();
+            		me.state.change(me.state.RESUME);
         		}
     			}, 100);
 }
