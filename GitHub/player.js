@@ -187,28 +187,6 @@ var PlayerEntity = me.ObjectEntity.extend({
    		
     	if(res && (res.obj.type == me.game.ENEMY_OBJECT)){
     			this.isDeadz = true;
-    			/*me.input.unbindKey(me.input.KEY.A);
-    			me.input.unbindKey(me.input.KEY.W);
-    			me.input.unbindKey(me.input.KEY.S);
-    			me.input.unbindKey(me.input.KEY.D);
-    			me.input.unbindKey(me.input.KEY.SPACE);
-    			this.vel.y = 0;
-    			this.gravity = 0;
-    			
-    			
-    		this.setCurrentAnimation("die", function(){
-    			
-    			
-    			
-    			var currentLevel = me.levelDirector.getCurrentLevelId();
-    			bulletAlive = false;
-    			me.levelDirector.loadLevel(currentLevel);
-    			me.game.remove(this)});
-    		this.parent();
-    		
-    		return true;
-    	
-    			*/
     		
     	}
  		
@@ -267,11 +245,7 @@ var PlayerEntity = me.ObjectEntity.extend({
 });
 
 PlayerEntity.prototype.isDeadz;
-//PlayerEntity.prototype.pos.x;
-//PlayerEntity.prototype.pos.y;
-//PlayerEntity.prototype.xvel = 0;
-//PlayerEntity.prototype.vel.x = 0;
-//PlayerEntity.prototype.vel.y = 0;
+
 var arm;
 var armNum = 0;
 var walkleft = true;
