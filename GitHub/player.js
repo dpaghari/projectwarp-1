@@ -23,12 +23,14 @@ var PlayerEntity = me.ObjectEntity.extend({
         this.addAnimation("run",[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22]);
         this.isDeadz = false;
         armNum = 0;
+        
     	//me.game.remove(arm);
         me.input.bindKey(me.input.KEY.A, "left");
 		me.input.bindKey(me.input.KEY.D, "right");
 		me.input.bindKey(me.input.KEY.W, "jump", true);
 		me.input.bindKey(me.input.KEY.S, "down", true);
 		me.input.bindKey(me.input.KEY.SPACE, "warp", true);
+		me.input.bindKey(me.input.KEY.R, "restart", true);
 		
         
        //this.arm = new ArmEntity(this.pos.x, this.pos.y, {image: "arm", spritewidth: 20, spriteheight: 20});
@@ -173,7 +175,16 @@ var PlayerEntity = me.ObjectEntity.extend({
        		}
         }
 
-        
+        if(me.input.isKeyPressed('restart')){
+        		
+        		var currentLevel = me.levelDirector.getCurrentLevelId();
+        		me.levelDirector.loadLevel(currentLevel);
+        		
+        	
+        	
+        		
+        	
+        }
         if(me.input.isKeyPressed('warp')) {
         	if(bulletAlive == true){
         	//warps to bullet 

@@ -301,7 +301,7 @@ var PlayScreen = me.ScreenObject.extend({
 		// loads previous level
 		me.levelDirector.loadLevel("level1");
 		me.sys.gravity = 0.98;
-		me.sys.fps = 60;
+		//me.sys.fps = 60;
 		
 		
 		//Find a cleaner way to make the song repeat...
