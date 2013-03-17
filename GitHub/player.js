@@ -17,7 +17,7 @@ var PlayerEntity = me.ObjectEntity.extend({
         this.parent(x, y, settings);
         bulletAlive = false;
         this.animationspeed = 1;
-        this.addAnimation("die", [56,57,58,59,60,61,62,63,64,65,66,67]);
+        this.addAnimation("die", [56,57,58,59,60,61,62,63,64,65,66,67,68]);
         this.addAnimation("jump",[42,43,44,45,46,47,48,49,50,51,52,53,54,55]);
         this.addAnimation("stand",[24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40]);
         this.addAnimation("run",[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22]);
@@ -191,7 +191,7 @@ var PlayerEntity = me.ObjectEntity.extend({
     	}
  		
  		if(this.isDeadz){
- 			
+ 				me.game.remove(arm);
  				me.input.unbindKey(me.input.KEY.A);
     			me.input.unbindKey(me.input.KEY.W);
     			me.input.unbindKey(me.input.KEY.S);
@@ -204,7 +204,7 @@ var PlayerEntity = me.ObjectEntity.extend({
     		this.setCurrentAnimation("die", function(){
     			
     			
-    			
+    		
     			var currentLevel = me.levelDirector.getCurrentLevelId();
     			bulletAlive = false;
     			me.levelDirector.loadLevel(currentLevel);
