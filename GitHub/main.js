@@ -41,6 +41,14 @@ var g_resources =
 	type: "tmx",
 	src: "data/tileset/level7.tmx"
 },{
+	name: "level8",
+	type: "tmx",
+	src: "data/tileset/level8.tmx"
+},{
+	name: "level9",
+	type: "tmx",
+	src: "data/tileset/level9.tmx"
+},{
 	name : "loading_screen",
 	type : "image",
 	src : "data/loading_screen.jpg"
@@ -102,6 +110,30 @@ var g_resources =
 	type: "image",
 	src: "data/Art/turret_test.png"
 },{
+	name: "glaserv_mid",
+	type: "image",
+	src: "data/Art/glaser_ver_m.png"
+},{
+	name: "glaserv_top",
+	type: "image",
+	src: "data/Art/glaser_ver_t.png"
+},{
+	name: "glaserv_bot",
+	type: "image",
+	src: "data/Art/glaser_ver_b.png"
+},{
+	name: "glaserh_mid",
+	type: "image",
+	src: "data/Art/glaser_hor_m.png"
+},{
+	name: "glaserh_left",
+	type: "image",
+	src: "data/Art/glaser_hor_l.png"
+},{
+	name: "glaserh_right",
+	type: "image",
+	src: "data/Art/glaser_hor_r.png"
+},{
 	name: "laserv_mid",
 	type: "image",
 	src: "data/Art/laser_ver_m.png"
@@ -149,6 +181,14 @@ var g_resources =
 	name: "level_select_screen",
 	type: "image",
 	src: "data/GUI/level_select_screen.png"
+},{
+	name: "background",
+	type: "image",
+	src: "data/Art/background.png"	
+},{
+	name: "foreground",
+	type: "image",
+	src: "data/tileset/foreground.png"
 }];
 var jsApp = {
 	/* ---
@@ -222,6 +262,9 @@ var jsApp = {
 		me.entityPool.add("Laser6Entity", Laser6Entity, true);					// Horizontal Laser Beam right piece
 		me.entityPool.add("Play_Game", PlayGameEntity);
 		me.entityPool.add("MarkerEntity", MarkerEntity, true);						// Death Threshold
+		me.entityPool.add("GreenLaserv", GreenLaservEntity, true);
+		me.entityPool.add("GreenLaserh", GreenLaserhEntity, true);
+		
 		
 		
 		

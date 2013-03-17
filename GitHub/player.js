@@ -69,7 +69,7 @@ var PlayerEntity = me.ObjectEntity.extend({
     		console.log(coordy);
     		if(armNum == 0){
     	 	arm = new ArmEntity(this.pos.x, this.pos.y, {image: "arm", spritewidth: 20, spriteheight: 20});
-        	me.game.add(arm, this.z + 10); 
+        	me.game.add(arm, this.z+1); 
        		me.game.sort();
        		
        		armNum = 1;

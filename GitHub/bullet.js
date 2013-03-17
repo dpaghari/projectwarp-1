@@ -40,7 +40,38 @@ var BulletEntity = me.ObjectEntity.extend({
     
     
     
-    
+     if (res && (res.obj.type === "greenLaserv")){											// if the bullet hits a vertical green laser
+       	      if (res.x != 0)
+              {
+                           // x axis
+                       if (res.x<0){																
+                          me.game.remove(this);												// destroy it
+                          bulletAlive = false;  
+                       }
+                    
+                       
+                       else{
+                           me.game.remove(this);
+                           bulletAlive = false;            	
+                       }
+                      
+              }
+           
+       }
+         if (res && (res.obj.type === "greenLaserh")){											// if the bullet hits a horizontal green laser
+	   	   if (res.y != 0)
+              {
+              	if (res.y > 0){
+              		me.game.remove(this);														// destroy it
+              		bulletAlive = false;
+              	}
+              	else{
+              		me.game.remove(this);
+              		bulletAlive = false;
+              	}
+              }
+	   	
+	   } 
         if (res && (res.obj.type === "glassWallv")){											// if the bullet hits a vertical glass wall
        	      if (res.x != 0)
               {
