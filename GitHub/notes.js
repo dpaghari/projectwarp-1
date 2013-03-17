@@ -8,15 +8,17 @@ var NoteEntity = me.CollectableEntity.extend({
     init: function(x, y, settings) {
         // call the parent constructor
         this.parent(x, y, settings);
-       
+        
+        daCurLevel = me.levelDirector.getCurrentLevelId();
+       	noteCollected = false;
     },
  
     // this function is called by the engine, when
     // an object is touched by something (here collected)
     onCollision: function() {
-    	//var nextLevel = me.levelDirector.nextLevel();
-        // do something when collected
-        //me.levelDirector.nextLevel();
+    	
+    	noteCollected = true;
+    	
         this.collidable = false;
         me.game.remove(this);
         me.game.sort();
@@ -26,3 +28,6 @@ var NoteEntity = me.CollectableEntity.extend({
     }
  */
 });
+
+var noteCollected;
+var daCurLevel;

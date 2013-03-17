@@ -54,6 +54,9 @@ var PlayerEntity = me.ObjectEntity.extend({
  
     ------ */
     update: function() {
+    	
+    	console.log(daCurLevel);
+    	
 	    	var res = me.game.collide(this);
     	         if (res && (res.obj.type == "glassWallv"||res.obj.type == "glassWallh")){
     		        if (res.x != 0){
