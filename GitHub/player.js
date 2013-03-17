@@ -172,7 +172,7 @@ var PlayerEntity = me.ObjectEntity.extend({
         }
           if (this.pos.y > coordy){
     		
-    		alert("Game Over!");
+    		//alert("Game Over!");
     		me.game.remove(this);
     		bulletAlive = false;
     		var currentLevel = me.levelDirector.getCurrentLevelId();
