@@ -65,6 +65,21 @@ var PlayerEntity = me.ObjectEntity.extend({
                       
                  }
         	}
+        	
+        	 if (res && (res.obj.type == "rubberWallv")){
+    		        if (res.x != 0){
+                 // x axis
+                    if (res.x<0){
+                    	 walkleft = false;
+			             walkright= true;
+                    }  
+                    else{
+                    	 walkleft = true;
+			             walkright= false;                    	
+                    }
+                      
+                 }
+        	}
     	
     		console.log(coordy);
     		if(armNum == 0){
