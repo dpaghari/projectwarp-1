@@ -83,10 +83,6 @@ var g_resources =
 	type: "audio",
 	src: "data/audio/"
 },{
-	name: "mysterious caves",
-	type: "audio",
-	src: "data/audio/"
-},{
 	name: "cling",
     type: "audio",
     src: "data/audio/",
@@ -114,7 +110,7 @@ var g_resources =
 },{
 	name: "sentrygun",
 	type: "image",
-	src: "data/Art/turret_test.png"
+	src: "data/Art/sentry_sheet.png"
 },{
 	name: "glaserv_mid",
 	type: "image",
@@ -199,6 +195,74 @@ var g_resources =
 	name: "pauseguy",
 	type: "image",
 	src:  "data/Art/pause.png"
+},{
+	name: "bulletdie",
+	type: "image",
+	src: "data/Art/bulletdie_sheet.png"
+},{
+	name: "note1",
+	type: "image",
+	src: "data/labnotes/labnote1.png"
+},{
+	name: "note2",
+	type: "image",
+	src: "data/labnotes/labnote2.png"
+},{
+	name: "note3",
+	type: "image",
+	src: "data/labnotes/labnote3.png"
+},{
+	name: "note4",
+	type: "image",
+	src: "data/labnotes/labnote4.png"
+},{
+	name: "note5",
+	type: "image",
+	src: "data/labnotes/labnote5.png"
+},{
+	name: "note6",
+	type: "image",
+	src: "data/labnotes/labnote6.png"
+},{
+	name: "note7",
+	type: "image",
+	src: "data/labnotes/labnote7.png"
+},{
+	name: "note8",
+	type: "image",
+	src: "data/labnotes/labnote8.png"
+},{
+	name: "note9",
+	type: "image",
+	src: "data/labnotes/labnote9.png"
+},{
+	name: "No_Pass",
+	type: "audio",
+	src: "data/audio/",
+	channel: 1
+},{
+	name: "warp_sheet",
+	type:"image",
+	src: "data/Art/warp.png"
+},{
+	name: "sentrygun2",
+	type: "image",
+	src: "data/Art/sentry_sheet2.png"
+},{
+	name: "Crescent",
+	type: "audio",
+	src: "data/audio/",
+	channel: 1
+},{
+	name: "TheFever",
+	type: "audio",
+	src: "data/audio/",
+	channel: 1
+},{
+	name: "Union",
+	type: "audio",
+	src: "data/audio/",
+	channel: 1
 }];
 var jsApp = {
 	/* ---
@@ -244,13 +308,16 @@ var jsApp = {
 		me.state.set(me.state.PLAY, new PlayScreen());
 
 		// set the pause screen object
-		me.state.set(me.state.PAUSE, new PauseScreen());
+		//me.state.set(me.state.PAUSE, new PauseScreen());
+		
+		// set the load screen object
+		//me.state.set(me.state.LOADING, new CustomLoadingScreen());
 		
 		// set the cursor screen
 		me.state.set(me.state.SELECT, new CursorScreen());
 
 		// set a global fading transition for the screen
-		//me.state.transition("fade", "#FFFFFF", 250);
+		me.state.transition("fade", "#FFFFFF", 250);
 
 		// add our player entity in the entity pool
 		me.entityPool.add("mainPlayer", PlayerEntity);							// Winston
@@ -271,6 +338,7 @@ var jsApp = {
 		me.entityPool.add("MarkerEntity", MarkerEntity, true);						// Death Threshold
 		me.entityPool.add("GreenLaserv", GreenLaservEntity, true);
 		me.entityPool.add("GreenLaserh", GreenLaserhEntity, true);
+		me.entityPool.add("BulletDeathEntity", BulletDeathEntity, true);
 		
 		
 		
@@ -289,7 +357,7 @@ var jsApp = {
 
 		// start the game
 		me.state.change(me.state.MENU);
-		console.log("went to title screen (screens.js)");
+		//console.log("went to title screen (screens.js)");
 	}
 };
 
@@ -309,15 +377,11 @@ var PlayScreen = me.ScreenObject.extend({
 		me.levelDirector.loadLevel("level1");
 		me.sys.gravity = 0.98;
 		//me.sys.fps = 60;
-		
+		 me.audio.playTrack("No_Pass", 0.5);
 		
 		//Find a cleaner way to make the song repeat...
-		//me.audio.playTrack("mysterious caves", 0);
-
-		if (me.input.isKeyPressed('escape')){
-			var currentLevel = me.levelDirector.getCurrentLevelId();
-			me.state.change(me.state.PAUSE);
-		}
+		
+		
 		me.game.sort();
 	},
 

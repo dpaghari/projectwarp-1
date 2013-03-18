@@ -44,6 +44,7 @@ var CursorScreen = me.ScreenObject.extend({
       
 		// play something
 		me.audio.play("cling");
+		me.audio.playTrack("Crescent",0.3);
 		
 	},
 	
@@ -66,8 +67,11 @@ var CursorScreen = me.ScreenObject.extend({
 			}
 			if(me.input.isKeyPressed('enter')){
 				me.state.change(me.state.PLAY);
+				me.audio.stopTrack();
 				console.log("pressed enter in play game");
 			}
+			
+			
 		}
 		if(this.title == me.loader.getImage("title_screen_options")){
 			if(me.input.isKeyPressed('jump') || me.input.isKeyPressed("upz")){
@@ -98,30 +102,49 @@ var CursorScreen = me.ScreenObject.extend({
 		if(this.title == me.loader.getImage("level_select_screen")){
 			if(me.input.isKeyPressed('one')){
 					me.levelDirector.loadLevel("level1");
+					 me.audio.stopTrack();
+					 me.audio.playTrack("No_Pass");
+					 
 				}
 				else if(me.input.isKeyPressed('two')){
 					me.levelDirector.loadLevel("level2");
+					 me.audio.stopTrack();
+					 me.audio.playTrack("Union");
 				}
 				else if(me.input.isKeyPressed('three')){
 					me.levelDirector.loadLevel("level3");
+					 me.audio.stopTrack();
+					 me.audio.playTrack("TheFever");
 				}
 				else if(me.input.isKeyPressed('four')){
 					me.levelDirector.loadLevel("level4");
+				 me.audio.stopTrack();
+				 me.audio.playTrack("No_Pass");
 				}
 				else if(me.input.isKeyPressed('five')){
 					me.levelDirector.loadLevel("level5");
+					 me.audio.stopTrack();
+					 me.audio.playTrack("Union");
 				}
 				else if(me.input.isKeyPressed('six')){
 					me.levelDirector.loadLevel("level6");
+					 me.audio.stopTrack();
+					 me.audio.playTrack("TheFever");
 				}
 				else if(me.input.isKeyPressed('seven')){
 					me.levelDirector.loadLevel("level7");
+					 me.audio.stopTrack();
+					 me.audio.playTrack("No_Pass");
 				}
 				else if(me.input.isKeyPressed('eight')){
 					me.levelDirector.loadLevel("level8");
+					 me.audio.stopTrack();
+					 me.audio.playTrack("Union");
 				}
 				else if(me.input.isKeyPressed('nine')){
 					me.levelDirector.loadLevel("level9");
+					 me.audio.stopTrack();
+					 me.audio.playTrack("No_Pass");
 				}
 				else if(me.input.isKeyPressed('escape')){
 					this.title = me.loader.getImage("title_screen_play_game");

@@ -32,33 +32,39 @@ var SentryBulletEntity = me.ObjectEntity.extend({
     update: function() {
     	var elapsedTime = me.timer.getTime() - this.timeAlive;	
     	var collision = this.collisionMap.checkCollision(this.collisionBox, this.vel);
-		//var res = me.game.collide(this);
+		
   			
     	// Bullet Lifetime				
     		
     	 if (collision.yprop.isSolid||collision.xprop.isSolid)
 	      {
 	      	me.audio.play("stomp"); 
+	      	bullDie = new BulletDeathEntity(this.pos.x+10, this.pos.y,{image: "bulletdie", spritewidth: 18, spriteheight: 18}); 												// destroy it
+                          me.game.add(bullDie, this.z);
+                      	  me.game.sort();
 		    me.game.remove(this);
 			
 		  
 	      }							
     	// If 1 second has passed					
     	if(elapsedTime > 1500){		
-    		sbulletAlive = false;									
+    		sbulletAlive = false;	
+    		bullDie = new BulletDeathEntity(this.pos.x+10, this.pos.y,{image: "bulletdie", spritewidth: 18, spriteheight: 18}); 												// destroy it
+                          me.game.add(bullDie, this.z);
+                      	  me.game.sort();								
     		me.game.remove(this);
     		
     		me.game.sort();
     		
     	}
-    	/*var count = me.timer.tick;
-    	for(i = count; i < 60; i++){
-    		if(count % 4 == 0){
-    			me.game.remove(this);
-    		}
-    		
-    	}
-    	*/
+    	
+    	if(gotHit == true){
+     		bullDie = new BulletDeathEntity(this.pos.x+10, this.pos.y,{image: "bulletdie", spritewidth: 18, spriteheight: 18}); 												// destroy it
+                          me.game.add(bullDie, this.z);
+                      	  me.game.sort();
+     		me.game.remove(this);
+     		
+     	}
    		
     	//if(this.collideType(solid, false)){
     	//	me.game.remove(this, true);
@@ -70,4 +76,4 @@ var SentryBulletEntity = me.ObjectEntity.extend({
  
 });
 SentryBulletEntity.prototype.timeAlive;
-//BulletEntity.prototype.timeAlive;
+var gotHit;

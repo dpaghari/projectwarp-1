@@ -45,14 +45,20 @@ var BulletEntity = me.ObjectEntity.extend({
               {
                            // x axis
                        if (res.x<0){																
-                          me.game.remove(this);												// destroy it
-                          bulletAlive = false;  
+                          me.game.remove(this);
+                          bulletAlive = false; 
+                          bullDie = new BulletDeathEntity(this.pos.x, this.pos.y,{image: "bulletdie", spritewidth: 18, spriteheight: 18}); 												// destroy it
+                          me.game.add(bullDie, this.z);
+                          me.game.sort();
+                           
                        }
                     
                        
                        else{
-                           me.game.remove(this);
-                           bulletAlive = false;            	
+                          me.game.remove(this);
+                          bulletAlive = false; 
+						  
+                                     	
                        }
                       
               }
@@ -149,9 +155,13 @@ var BulletEntity = me.ObjectEntity.extend({
 	    
 	    if (collision.yprop.isSolid||collision.xprop.isSolid)
 	      {
-	      	me.audio.play("stomp"); 
+	      	
 		    me.game.remove(this);
 			bulletAlive = false;
+			bullDie = new BulletDeathEntity(this.pos.x, this.pos.y,{image: "bulletdie", spritewidth: 18, spriteheight: 18}); 												// destroy it
+                          me.game.add(bullDie, this.z);
+                      	  me.game.sort();
+                      	  me.audio.play("stomp"); 
 		  
 	      }				
     					
@@ -161,6 +171,9 @@ var BulletEntity = me.ObjectEntity.extend({
     	if(elapsedTime > 1500){											
     		me.game.remove(this);
     		bulletAlive = false;
+    		bullDie = new BulletDeathEntity(this.pos.x, this.pos.y,{image: "bulletdie", spritewidth: 18, spriteheight: 18}); 												// destroy it
+                          me.game.add(bullDie, this.z);
+                      	  me.game.sort();
     		
     	}
     	this.updateMovement();
@@ -177,7 +190,7 @@ var BulletEntity = me.ObjectEntity.extend({
  
  
 });
-
+var bullDie;
 BulletEntity.prototype.timeAlive;
 BulletEntity.prototype.checkcol;
 BulletEntity.prototype.rubber;
