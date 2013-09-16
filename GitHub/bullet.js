@@ -40,7 +40,7 @@ var BulletEntity = me.ObjectEntity.extend({
     
     
     
-     if (res && (res.obj.type === "greenLaserv")){											// if the bullet hits a vertical green laser
+     if (res && (res.obj.type === "greenLaserv")){											// if the bullet hits a vertical green laser destroy it
        	      if (res.x != 0)
               {
                            // x axis
@@ -118,25 +118,6 @@ var BulletEntity = me.ObjectEntity.extend({
 	   if (res && (res.obj.type == "rubberWallv")){											// if the bullet hits a vertical rubber wall
        	      this.rubber = true
        	      this.checkcol++;
-       	      /*if (res.x != 0)
-              {
-                           // x axis
-                       if (res.x<0){																// kill the bullet's velocity
-                           direction = new me.Vector2d(0, 0);
-                           this.vel=direction;   
-                           this.gravity = 5;  
-                           
-                       }
-                    
-                       
-                       else{
-                           direction = new me.Vector2d(0, 0);
-                           this.vel=direction;   
-                           this.gravity = 5;
-                                  	
-                       }
-                      
-              }*/
          
            
        } 

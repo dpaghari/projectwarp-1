@@ -272,15 +272,11 @@ var jsApp = {
 	 ---			*/
 	onload : function() {
 
-		//var canvasWidth = me.video.getWidth();
-	    //var canvasHeight = me.video.getHeight();
 		// init the video
 		if (!me.video.init('jsapp', 800, 600, false, 1.0)) {
 			alert("Sorry but your browser does not support html 5 canvas.");
 			return;
 		}
-		
-		//me.debug.renderHitBox = true;
 		// load everything & display a loading screen
 		me.state.change(me.state.LOADING);
 		
@@ -306,12 +302,6 @@ var jsApp = {
 
 		// set the play screen object
 		me.state.set(me.state.PLAY, new PlayScreen());
-
-		// set the pause screen object
-		//me.state.set(me.state.PAUSE, new PauseScreen());
-		
-		// set the load screen object
-		//me.state.set(me.state.LOADING, new CustomLoadingScreen());
 		
 		// set the cursor screen
 		me.state.set(me.state.SELECT, new CursorScreen());
@@ -334,10 +324,9 @@ var jsApp = {
 		me.entityPool.add("Laser4Entity", Laser4Entity, true);					// Vertical Laser Beam bot piece
 		me.entityPool.add("Laser5Entity", Laser5Entity, true);					// Horizontal Laser Beam left piece
 		me.entityPool.add("Laser6Entity", Laser6Entity, true);					// Horizontal Laser Beam right piece
-		me.entityPool.add("Play_Game", PlayGameEntity);
-		me.entityPool.add("MarkerEntity", MarkerEntity, true);						// Death Threshold
-		me.entityPool.add("GreenLaserv", GreenLaservEntity, true);
-		me.entityPool.add("GreenLaserh", GreenLaserhEntity, true);
+		me.entityPool.add("MarkerEntity", MarkerEntity, true);					// Death Threshold
+		me.entityPool.add("GreenLaserv", GreenLaservEntity, true);				// Vertical Green Laser
+		me.entityPool.add("GreenLaserh", GreenLaserhEntity, true);				// Horizontal Green Laser
 		me.entityPool.add("BulletDeathEntity", BulletDeathEntity, true);
 		
 		
@@ -385,7 +374,6 @@ var PlayScreen = me.ScreenObject.extend({
 		me.game.sort();
 	},
 
-	//CollectableEntity.onCollision(labNoteVector, PlayerEntity);
 	/* ---
 
 	 action to perform when game is finished (state change)
@@ -393,30 +381,8 @@ var PlayScreen = me.ScreenObject.extend({
 	 --- */
 	onDestroyEvent : function() {
 		
-		//Go to the pause screen when ESCAPE is pressed
-		//me.input.bindKey(me.input.KEY.ESCAPE);
-		//me.state.change(me.state.PAUSE);
-
-		//just in case
-		//this.scrollertween.stop();
 	}
-	
-	/*
-	//Update function	
-	update : function(){
-		// enter pressed ?
-		if (me.input.isKeyPressed('escape')){
-			me.state.change(me.state.PAUSE);
-		}
-		if (me.input.isKeyPressed('enter'))
-		{
-			me.state.change(me.state.PLAY);
-		}
-		
-		//return true;
-		this.updateMovement();
-	},
-	*/
+
 	
 });
 
