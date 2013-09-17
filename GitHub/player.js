@@ -11,12 +11,15 @@ var PlayerEntity = me.ObjectEntity.extend({
  
     init: function(x, y, settings) {
                                     
+    	// Set the sprite's height and width(important for spritesheet)
     	settings.spritewidth = 32;
     	settings.spriteheight = 44;
         // call the constructor
         this.parent(x, y, settings);
         bulletAlive = false;
         this.animationspeed = 1;
+        
+        // Assign Animations to each character state based on a single spritesheet
         this.addAnimation("die", [56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86]);
         this.addAnimation("jump",[42,43,44,45,46,47,48,49,50,51,52,53,54,55]);
         this.addAnimation("stand",[24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40]);
@@ -26,7 +29,7 @@ var PlayerEntity = me.ObjectEntity.extend({
         gotHit = false;
         isReading = false;
         
-    	//me.game.remove(arm);
+        // Set the keyboard
         me.input.bindKey(me.input.KEY.A, "left");
 		me.input.bindKey(me.input.KEY.D, "right");
 		me.input.bindKey(me.input.KEY.W, "jump", true);
@@ -35,9 +38,6 @@ var PlayerEntity = me.ObjectEntity.extend({
 		me.input.bindKey(me.input.KEY.R, "restart", true);
 		me.input.bindKey(me.input.KEY.ESC, "pause", true);
 		me.input.bindKey(me.input.KEY.E, "read", true);
-        
-       //this.arm = new ArmEntity(this.pos.x, this.pos.y, {image: "arm", spritewidth: 20, spriteheight: 20});
-			
        
  		this.gravity = 0.98;
         // set the default horizontal & vertical speed (accel vector)
@@ -58,8 +58,12 @@ var PlayerEntity = me.ObjectEntity.extend({
     update: function() {
             //console.log(time);
                                           
+    	
+    	
     		walkleft = walkright = true;
 	    	var res = me.game.collide(this);
+	    	
+	    	// If the player collides with a glass wall restrict his movement
     	         if (res && (res.obj.type == "glassWallv"||res.obj.type == "glassWallh")){
     		        if (res.x != 0){
                  // x axis
@@ -74,8 +78,8 @@ var PlayerEntity = me.ObjectEntity.extend({
                       
                  }
         	}
-        	
-        	 if (res && (res.obj.type == "rubberWallv" || res.obj.type == "sentryguy")){	//player collision with rubberwall
+        	// If the player collides with a rubber wall restrict his movement
+        	 if (res && (res.obj.type == "rubberWallv" || res.obj.type == "sentryguy")){	
     		        if (res.x != 0){
                  // x axis
                     if (res.x<0){
@@ -96,7 +100,7 @@ var PlayerEntity = me.ObjectEntity.extend({
         		}
         	}
     	    
-    	    
+    	    // If the player has collected a note and presses E it allows the player to read the note depending on the level
     	    if(isReading == false && noteCollected == true && me.input.isKeyPressed("read")){
     	    			if(daCurLevel == "level1"){
     						noteThing = new me.SpriteObject(this.pos.x, this.pos.y - 200, me.loader.getImage("note1"));
@@ -155,6 +159,7 @@ var PlayerEntity = me.ObjectEntity.extend({
     	    			isReading = true;
 
     	    }
+    	    // Put Away Note to continue playing
     	    if(isReading == true && me.input.isKeyPressed("read")){
     	   		me.game.remove(noteThing);
     	   		me.game.sort();
@@ -164,7 +169,7 @@ var PlayerEntity = me.ObjectEntity.extend({
     	   
     	    
     	    
-    		
+    		// Attach Arm to Character
     		if(armNum == 0){
     	 	arm = new ArmEntity(this.pos.x, this.pos.y, {image: "arm", spritewidth: 20, spriteheight: 20});
         	me.game.add(arm, this.z+1); 
@@ -172,6 +177,7 @@ var PlayerEntity = me.ObjectEntity.extend({
        		
        		armNum = 1;
        		}
+       		// Arm Logic to keep arm at a "normal" position when the character moves
         	if (faceRight == true){
 			
 			arm.pos.x = this.pos.x - 1;
@@ -252,14 +258,18 @@ var PlayerEntity = me.ObjectEntity.extend({
         		}
     			}, 100);
 		}
+		
+		// If they press R
         if(me.input.isKeyPressed('restart')){
         		
         		var currentLevel = me.levelDirector.getCurrentLevelId();
         		me.levelDirector.loadLevel(currentLevel);        	
         }
+        
+        // If they press Space they activate the warp mechanic
         if(me.input.isKeyPressed('warp')) {
         	if(bulletAlive == true){
-        	//warps to bullet 
+        	//warps to bullet's position
         	warpIn = new WarpEntity(this.pos.x, this.pos.y,{image:"warp_sheet", spritewidth: 32, spriteheight: 44});
         	me.game.add(warpIn, this.z);
         	me.game.sort();
@@ -274,6 +284,7 @@ var PlayerEntity = me.ObjectEntity.extend({
         	me.game.remove(bullet, true);
         	}
         }
+        // If the character falls past the death threshold
           if (this.pos.y > coordy){
     		this.isDeadz = true;
     	}
@@ -283,13 +294,13 @@ var PlayerEntity = me.ObjectEntity.extend({
         
       
     	var res = me.game.collide(this);
-   		
+   		// If the player collides with an enemy object
     	if(res && (res.obj.type == me.game.ENEMY_OBJECT)){
     			this.isDeadz = true;
     			gotHit = true;
     		
     	}
- 		
+ 		// Disable controls when dead
  		if(this.isDeadz){
  				me.game.remove(arm);
  				me.input.unbindKey(me.input.KEY.A);
@@ -352,10 +363,10 @@ var hileft = false;
 var bullet;
 var faceLeft;
 var faceRight;
-        	var mouseX ;		 //mouse x position + offset of viewport
-        	var mouseY;		//mouse y position + offset of viewport
-        	var magnitude;
-        	var vectorX ;				
-  		   	var vectorY;
-        	var speed;
-       		var direction;
+var mouseX ;		 //mouse x position + offset of viewport
+var mouseY;			//mouse y position + offset of viewport
+var magnitude;
+var vectorX ;				
+var vectorY;
+var speed;
+var direction;
