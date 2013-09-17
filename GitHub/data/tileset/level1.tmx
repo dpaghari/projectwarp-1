@@ -298,4 +298,6 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup name="Object Layer 2" width="150" height="30" visible="0"/>
+ <objectgroup name="Object Layer 3" width="150" height="30" visible="0"/>
 </map>

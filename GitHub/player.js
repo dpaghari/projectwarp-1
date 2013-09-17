@@ -10,7 +10,7 @@ var PlayerEntity = me.ObjectEntity.extend({
     ------ */
  
     init: function(x, y, settings) {
-    
+                                    
     	settings.spritewidth = 32;
     	settings.spriteheight = 44;
         // call the constructor
@@ -56,8 +56,8 @@ var PlayerEntity = me.ObjectEntity.extend({
  
     ------ */
     update: function() {
-    	
-    	console.log(daCurLevel);
+            //console.log(time);
+                                          
     		walkleft = walkright = true;
 	    	var res = me.game.collide(this);
     	         if (res && (res.obj.type == "glassWallv"||res.obj.type == "glassWallh")){

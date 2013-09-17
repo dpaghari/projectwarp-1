@@ -292,6 +292,9 @@ var jsApp = {
 
 		// set all resources to be loaded
 		me.loader.preload(g_resources);
+        
+        // Initialize the timer to be local
+        this.time = time;
 	},
 
 	/* ---
@@ -340,10 +343,6 @@ var jsApp = {
 		me.entityPool.add("GreenLaserh", GreenLaserhEntity, true);
 		me.entityPool.add("BulletDeathEntity", BulletDeathEntity, true);
 		
-		
-		
-		
-		
 		// enable the keyboard
 		me.input.bindKey(me.input.KEY.A, "left");
 		me.input.bindKey(me.input.KEY.D, "right");
@@ -354,7 +353,6 @@ var jsApp = {
 		me.input.bindKey(me.input.KEY.ENTER, "enter", true);
 		me.input.bindMouse(me.input.mouse.LEFT, me.input.KEY.U);
 		
-
 		// start the game
 		me.state.change(me.state.MENU);
 		//console.log("went to title screen (screens.js)");
@@ -363,6 +361,62 @@ var jsApp = {
 
 // jsApp
 
+var Manager = me.InvisibleEntity.extend({
+    init: function() {
+        // 5 minutes in milliseconds, count down to true
+        this.timer = new TimerObject(5 * 60 * 1000, true, 10, 10, "timer");
+        // start at 0, count up
+        this.clock = new TimerObject(0, false, 700, 10, "clock");
+    },
+
+    update: function() {
+        me.video.clearSurface(me.video.getScreenCanvas().getContext('2d'), '#000000');
+        this.timer.update();
+        this.clock.update();
+        console.log(this.clock);
+    }
+});
+
+var TimerHUD = me.HUD_Item.extend({
+    init: function(x, y) {
+      this.parent(x, y);
+      console.log("creating timer text");
+      this.font = new me.Font("Arial", 32, "white");
+    },
+
+    draw: function(ctx, x, y) {
+      this.font.draw(ctx, this.value, this.pos.x + x, this.pos.y + y + 20);
+    }
+});
+
+var TimerObject = function() {
+    function TimerObject(time, countdown, x, y, name) {
+      this.time = time;
+      this.countdown = countdown;
+      this.x = x;
+      this.y = y;
+      this.name = name;
+      me.game.HUD.addItem(name, new TimerHUD(this.x, this.y));
+      me.game.HUD.setItemValue(name, this.convert());
+      this.start_time = me.timer.getTime();
+    }
+
+    TimerObject.prototype.convert = function() {
+      var x = this.time / 1000;
+      x /= 60;
+      var seconds = x % 60;
+      x /= 60;
+      var minutes = x % 60;
+      return Math.floor(minutes) + ":" + Math.floor(seconds);
+    }
+
+    TimerObject.prototype.update = function() {
+      this.time += (me.timer.getTime() - this.start_time);
+      me.game.HUD.setItemValue(this.name, this.convert());
+    }
+    return TimerObject;
+}();
+
 /* the in game stuff*/
 var PlayScreen = me.ScreenObject.extend({
 
@@ -370,53 +424,24 @@ var PlayScreen = me.ScreenObject.extend({
 	 * Stuff to reset to state change
 	 */
 	
-	//var labNoteVector = me.Vector2D;
-
 	onResetEvent : function() {
+        setTime();
 		// loads previous level
 		me.levelDirector.loadLevel("level1");
 		me.sys.gravity = 0.98;
 		//me.sys.fps = 60;
-		 me.audio.playTrack("No_Pass", 0.5);
-		
-		//Find a cleaner way to make the song repeat...
-		
+        //me.audio.playTrack("No_Pass", 0.5);
+		// Add a HUD for the timer and start it
+        me.game.addHUD(0, 0, 800, 600);
+        me.game.add(new Manager(), 0);
 		
 		me.game.sort();
 	},
-
-	//CollectableEntity.onCollision(labNoteVector, PlayerEntity);
-	/* ---
-
-	 action to perform when game is finished (state change)
-
-	 --- */
+                                        
 	onDestroyEvent : function() {
-		
-		//Go to the pause screen when ESCAPE is pressed
-		//me.input.bindKey(me.input.KEY.ESCAPE);
-		//me.state.change(me.state.PAUSE);
-
-		//just in case
-		//this.scrollertween.stop();
+        me.game.addHUD(0, 0, 800, 600);
+        me.game.add(new Manager(), 0);
 	}
-	
-	/*
-	//Update function	
-	update : function(){
-		// enter pressed ?
-		if (me.input.isKeyPressed('escape')){
-			me.state.change(me.state.PAUSE);
-		}
-		if (me.input.isKeyPressed('enter'))
-		{
-			me.state.change(me.state.PLAY);
-		}
-		
-		//return true;
-		this.updateMovement();
-	},
-	*/
 	
 });
 

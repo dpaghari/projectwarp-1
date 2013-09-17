@@ -39,6 +39,56 @@
 				<script type="text/javascript" src="greenlaserv.js"></script>
 				<script type="text/javascript" src="bulletdie.js"></script>
 				<script type="text/javascript" src="warpaloids.js"></script>
+                <!--Set the timer to count down every second,
+                 then pass that variable to Game.render()----->
+                
+                <script>
+                    // Declare variables needed to caculate time
+                    var Ticker;
+                    var timeSoFar;
+                    var totalTime;
+                    var time;
+                    var prevTime;
+                    var timeFinish = false;
+                    var levelNum = 1;
+                    var restartGame;
+                    
+                    /* Checks to see if the next second
+                     * passed has yet to be rendered on the screen.
+                     * If it hasn't, update it or break out.
+                     */
+                    function checkTime() {
+                        if (time != prevTime) {
+                            prevTime = time;
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                    
+                    /* Function takes in the amount of time before
+                     * a level is initialized, and then sets that time
+                     * to be the total time. Calls the tick() function at
+                     * 1 second intervals.
+                     */
+                    function setTime(){
+                        timeSoFar = 0;
+                        totalTime = timeSoFar;
+                        time = timeSoFar;
+                        Ticker = setInterval(function() {tick()}, 1000);
+                    }
+                    
+                    /* Decrement the time left at 1 second intervals, then 
+                     * set that to be the time displayed on screen.
+                     */ 
+                    function tick(){
+                        id = document.getElementById("timer");
+                        timeSoFar++;
+                        time = timeSoFar;
+                    }
+                </script>
+                
 			</div>
 			</div>
 			</div>
