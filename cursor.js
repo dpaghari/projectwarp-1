@@ -1,18 +1,18 @@
-/*------------------- 
+/*-------------------
 a Cursor entity
 -------------------------------- */
 var CursorScreen = me.ScreenObject.extend({
- 
+
     init : function(){
 		this.parent(true);
-		
+
 		// title screen image
 		this.title         = null;
 	},
 	/* ---
 		reset function
 	   ----*/
-	
+
 	onResetEvent : function()
 	{
 		if (this.title == null){
@@ -34,27 +34,26 @@ var CursorScreen = me.ScreenObject.extend({
 			me.input.bindKey(me.input.KEY.DOWN, "downz", true);
 			//if(me.input.isKeyPressed('enter')){
 			//	me.state.change(me.state.PLAY);
-			//}		
+			//}
 			// enter pressed ?
-				
+
 		}
-		
+
 		// enable the keyboard
 		//me.input.bindKey(me.input.KEY.ENTER, "enter", true);
-      
+
 		// play something
 		me.audio.play("cling");
 		me.audio.playTrack("Crescent",0.3);
-		
+
 	},
-	
-	//Update function	
+
+	//Update function
 	update : function()
-	{		
+	{
 		/*if(me.input.isKeyPressed('three')){
-			
+
 			me.levelDirector.loadLevel("level3");
-			//console.log("one");
 		}*/
 		if(this.title == me.loader.getImage("title_screen_play_game")){
 			if(me.input.isKeyPressed('jump') || me.input.isKeyPressed("upz")){
@@ -70,8 +69,8 @@ var CursorScreen = me.ScreenObject.extend({
 				me.audio.stopTrack();
 				console.log("pressed enter in play game");
 			}
-			
-			
+
+
 		}
 		if(this.title == me.loader.getImage("title_screen_options")){
 			if(me.input.isKeyPressed('jump') || me.input.isKeyPressed("upz")){
@@ -93,18 +92,18 @@ var CursorScreen = me.ScreenObject.extend({
 				console.log("pressed down in level");
 			}
 			if(me.input.isKeyPressed('enter')){
-				
+
 				this.title = me.loader.getImage("level_select_screen");
-				
+
 			}
-		
+
 		}
 		if(this.title == me.loader.getImage("level_select_screen")){
 			if(me.input.isKeyPressed('one')){
 					me.levelDirector.loadLevel("level1");
 					 me.audio.stopTrack();
 					 me.audio.playTrack("No_Pass");
-					 
+
 				}
 				else if(me.input.isKeyPressed('two')){
 					me.levelDirector.loadLevel("level2");
@@ -159,11 +158,11 @@ var CursorScreen = me.ScreenObject.extend({
 		context.drawImage(this.title, 0,0);
 	},
 
-	
+
 	onDestroyEvent : function()
 	{
 		me.input.unbindKey(me.input.KEY.ENTER);
-		
+
 		//just in case
 		//this.scrollertween.stop();
     }

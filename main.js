@@ -362,14 +362,14 @@ var Manager = me.InvisibleEntity.extend({
         me.video.clearSurface(me.video.getScreenCanvas().getContext('2d'), '#000000');
         this.timer.update();
         this.clock.update();
-        console.log(this.clock);
+        // console.log(this.clock);
     }
 });
 
 var TimerHUD = me.HUD_Item.extend({
     init: function(x, y) {
       this.parent(x, y);
-      console.log("creating timer text");
+      // console.log("creating timer text");
       this.font = new me.Font("Arial", 32, "white");
     },
 
