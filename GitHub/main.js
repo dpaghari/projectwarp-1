@@ -7,7 +7,7 @@
 *   John Mai
 *   CMPS 20 & CMPE 131
 *   Winter 2013
-* 
+*
 * 	Created using melonjs game engine
 *   melonJS
 *   http://www.melonjs.org
@@ -16,7 +16,7 @@
 // GAME RESOURCES
 
 
-var g_resources = 
+var g_resources =
 	// LEVELS
 	[{name : "gametileset",type : "image",src : "data/tileset/gametileset.png"}, {
 	name : "level1",
@@ -38,7 +38,7 @@ var g_resources =
 	name: "level5",
 	type: "tmx",
 	src: "data/tileset/level5.tmx"
-},{ 
+},{
 	name: "level6",
 	type: "tmx",
 	src: "data/tileset/level6.tmx"
@@ -186,7 +186,7 @@ var g_resources =
 },{
 	name: "background",
 	type: "image",
-	src: "data/Art/background.png"	
+	src: "data/Art/background.png"
 },{
 	name: "foreground",
 	type: "image",
@@ -236,7 +236,7 @@ var g_resources =
 	type: "image",
 	src: "data/labnotes/labnote9.png"
 },{
-	name: "No_Pass",
+	name: "no_pass",
 	type: "audio",
 	src: "data/audio/",
 	channel: 1
@@ -249,17 +249,17 @@ var g_resources =
 	type: "image",
 	src: "data/Art/sentry_sheet2.png"
 },{
-	name: "Crescent",
+	name: "crescent",
 	type: "audio",
 	src: "data/audio/",
 	channel: 1
 },{
-	name: "TheFever",
+	name: "thefever",
 	type: "audio",
 	src: "data/audio/",
 	channel: 1
 },{
-	name: "Union",
+	name: "union",
 	type: "audio",
 	src: "data/audio/",
 	channel: 1
@@ -279,16 +279,16 @@ var jsApp = {
 		}
 		// load everything & display a loading screen
 		me.state.change(me.state.LOADING);
-		
+
 		// initialize the "audio"
-		me.audio.init("mp3,ogg");
+    me.audio.init("ogg, mp3");
 
 		// set all resources to be loaded
 		me.loader.onload = this.loaded.bind(this);
 
 		// set all resources to be loaded
 		me.loader.preload(g_resources);
-        
+
         // Initialize the timer to be local
         this.time = time;
 	},
@@ -305,7 +305,7 @@ var jsApp = {
 
 		// set the play screen object
 		me.state.set(me.state.PLAY, new PlayScreen());
-		
+
 		// set the cursor screen
 		me.state.set(me.state.SELECT, new CursorScreen());
 
@@ -331,7 +331,7 @@ var jsApp = {
 		me.entityPool.add("GreenLaserv", GreenLaservEntity, true);				// Vertical Green Laser
 		me.entityPool.add("GreenLaserh", GreenLaserhEntity, true);				// Horizontal Green Laser
 		me.entityPool.add("BulletDeathEntity", BulletDeathEntity, true);
-		
+
 		// enable the keyboard
 		me.input.bindKey(me.input.KEY.A, "left");
 		me.input.bindKey(me.input.KEY.D, "right");
@@ -341,7 +341,7 @@ var jsApp = {
 		me.input.bindKey(me.input.KEY.U, "shoot", true);
 		me.input.bindKey(me.input.KEY.ENTER, "enter", true);
 		me.input.bindMouse(me.input.mouse.LEFT, me.input.KEY.U);
-		
+
 		// start the game
 		me.state.change(me.state.MENU);
 		//console.log("went to title screen (screens.js)");
@@ -409,10 +409,10 @@ var TimerObject = function() {
 /* the in game stuff*/
 var PlayScreen = me.ScreenObject.extend({
 
-	/* 
+	/*
 	 * Stuff to reset to state change
 	 */
-	
+
 	onResetEvent : function() {
         setTime();
 		// loads previous level
@@ -423,10 +423,10 @@ var PlayScreen = me.ScreenObject.extend({
 		// Add a HUD for the timer and start it
         me.game.addHUD(0, 0, 800, 600);
         me.game.add(new Manager(), 0);
-		
+
 		me.game.sort();
 	},
-                                        
+
 	onDestroyEvent : function() {
         me.game.addHUD(0, 0, 800, 600);
         me.game.add(new Manager(), 0);
@@ -438,10 +438,10 @@ var PlayScreen = me.ScreenObject.extend({
 
 	 --- */
 	//onDestroyEvent : function() {
-		
+
 	//}
 
-	
+
 });
 
 //bootstrap :)
